@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/admin/equipment/add}" method="post">
+    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+    编号：<input type="text" name="number" placeholder="编号" required="required"><br>
+    名称：<input type="text" name="name" placeholder="名称" required="required"><br>
+    品牌：<input type="text" name="brand" placeholder="品牌" required="required"><br>
+    型号：<input type="text" name="model" placeholder="型号" required="required"><br>
+    使用位置：<input type="text" name="location" placeholder="使用位置" required="required"><br>
+    <input type="submit" value="添加">
+</form>
+</body>
+</html>

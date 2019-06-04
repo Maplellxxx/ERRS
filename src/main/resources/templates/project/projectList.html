@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table border="1">
+        所有项目列表：
+        <tr th:each="i:${info}">
+            <td>[[${i.id}]]</td>
+            <td><a th:href="@{/project/info/}+${i.number}">[[${i.number}]]</a></td>
+            <td>[[${i.name}]]</td>
+            <td>[[${i.starttime}]]</td>
+            <td>[[${i.stoptime}]]</td>
+            <td>[[${i.state}]]</td>
+            <td><a th:href="@{/userinfo/}+${i.originator}" th:text="${i.originator}"></a></td>
+
+
+        </tr>
+    </table>
+    <a th:href="@{/project/add}"><button>添加</button></a>
+
+<br><br>
+进行中的项目：
+<table border="1">
+    <tr th:each="i:${running}">
+        <td>[[${i.id}]]</td>
+        <td><a th:href="@{/project/info/}+${i.number}">[[${i.number}]]</a></td>
+        <td>[[${i.name}]]</td>
+        <td>[[${i.starttime}]]</td>
+        <!--<td>[[${i.stoptime}]]</td>-->
+        <td>[[${i.state}]]</td>
+
+        <td><a th:href="@{/userinfo/}+${i.originator}" th:text="${i.originator}"></a></td>
+    </tr>
+</table>
+<br><br>
+暂停的项目：
+<table border="1">
+    <tr th:each="i:${pause}">
+        <td>[[${i.id}]]</td>
+        <td><a th:href="@{/project/info/}+${i.number}">[[${i.number}]]</a></td>
+        <td>[[${i.name}]]</td>
+        <td>[[${i.starttime}]]</td>
+        <!--<td th:if="${!#strings.isEmpty(i.stoptime)}">[[${i.stoptime}]]</td>-->
+        <!--<td>[[${i.stoptime}]]</td>-->
+        <td>[[${i.state}]]</td>
+
+        <td><a th:href="@{/userinfo/}+${i.originator}" th:text="${i.originator}"></a></td>
+    </tr>
+</table>
+<br><br>
+完成的项目：
+<table border="1">
+    <tr th:each="i:${complete}">
+        <td>[[${i.id}]]</td>
+        <td><a th:href="@{/project/info/}+${i.number}">[[${i.number}]]</a></td>
+        <td>[[${i.name}]]</td>
+        <td>[[${i.starttime}]]</td>
+        <td>[[${i.stoptime}]]</td>
+        <td>[[${i.state}]]</td>
+
+        <td><a th:href="@{/userinfo/}+${i.originator}" th:text="${i.originator}"></a></td>
+    </tr>
+</table>
+
+    <br><br>
+    我创建的项目：
+    <table border="1">
+        <tr th:each="i:${establish}">
+            <td>[[${i.id}]]</td>
+            <td><a th:href="@{/project/info/}+${i.number}">[[${i.number}]]</a></td>
+            <td>[[${i.name}]]</td>
+            <td>[[${i.starttime}]]</td>
+            <td>[[${i.stoptime}]]</td>
+            <td>[[${i.state}]]</td>
+            <td><a th:href="@{/userinfo/}+${i.originator}" th:text="${i.originator}"></a></td>
+        </tr>
+    </table>
+</body>
+</html>

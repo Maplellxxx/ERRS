@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<style>
+		*{
+			margin:0px;
+			padding:0px;
+		}
+		#app{
+			width:40%;
+			height:600px;
+			position: absolute;
+			top:20px;
+			left:30%;
+			background-color: white;
+			box-shadow: 2px 2px 2px #c0c0c0;
+			text-align: center;
+			border-radius: 4px;
+			margin-top: 50px;
+		}
+		#head{
+			background-color: white;
+			width:100%;
+			height:100px;
+			text-align: center;
+		}
+		.Input1{
+			width:200px;
+			height:24px;
+			border-radius:4px;
+			border: 1px solid black;
+			margin-top: 10px;
+			padding-left: 10px;
+		}
+		.BTN1{
+			width:40px;
+			height:24px;
+			margin-top: 10px;
+			border-radius:4px;
+			border:1px solid black;
+			color:#009efb;
+			cursor: pointer;
+			background-color: white;
+		}
+		.xuanze{
+			width:100px;
+			height:30px;
+			margin-top: 20px;
+			border-radius:4px;
+		}
+		#End{
+			width:100%;
+			height:450px;
+			background-color: white;
+			text-align: center;
+		}
+		.active{
+			color:#007ec7;
+		}
+		.btn1{
+			width:100px;
+			height:100%;
+			border:none;
+			background-color: rgba(0,0,0,0);
+			font-size: 30px;
+			float:left;
+			color:#007ec7;
+		}
+		.BUTTON{
+			width:100%;
+			height:50px;
+			background-color: rgba(0,0,0,0);
+			text-align: center;
+			/*margin-left:19%;*/
+		}
+		.btn2{
+			width:50px;
+			height:100%;
+			font-size: 18px;
+			background-color: rgba(0,0,0,0);
+			border:none;
+
+			/*float:left;*/
+		}
+		/*.tr1{
+			background-color: #ebf9ff;
+		}*/
+		.Btn1{
+			width:25px;
+			height:25px;
+			border-radius: 50%;
+			border:none;
+			font-size: 15px;
+			background-color: rgba(0,0,0,0);
+			/*color:white;*/
+		}
+	</style>
+</head>
+<body style="background-color: rgba(0,0,0,0);">
+	<div id="app">
+		<p style="font-size:24px; ">搜索页面</p>
+		<div id="head">
+			<input type="text" name="" class="Input1" v-model="text">
+			<button class="BTN1" @click="Select"><i class="fas fa-search"></i></button>
+			<br>
+			<select class="xuanze" v-model="Sel4">
+				<option v-text="Sel1"></option>
+				<option v-text="Sel2"></option>
+				<option v-text="Sel3"></option>
+
+			</select>
+		</div>
+		<div id="End">
+			<p style="font-size: 18px;">搜索结果:</p>
+			<br>
+			<div v-if="S == 1">
+			<table class="table table-striped table-bordered table-hover" style="background-color: white;">
+				<thead>
+				<tr>
+				<th><p>设备编号</p></th>
+					<th><p>设备名称</p></th>
+						<th><p>设备型号</p></th>
+						<th><p>设备位置</p></th>
+							<th><p>设备项目</p></th>
+							<th><p>设备人员</p></th>
+
+
+				</tr>
+				</thead>
+				<tbody>
+				<tr v-for="(item,index) in List2" class="tr1"  v-if="m <= index && index <= n">
+					<td><a href="设备信息.html">{{item.ID}}</a></td>
+					<td>{{item.Name}}</td>
+					<td>{{item.Kind}}</td>
+					<td>{{item.Where}}</td>
+					<td>{{item.Project}}</td>
+					<td>{{item.User}}</td>
+				</tr>
+				<tr v-for="(item,index) in List3" class="tr1"  v-if="m <= index && index <= n">
+					<td><a href="设备信息.html">{{item.ID}}</a></td>
+					<td>{{item.Name}}</td>
+					<td>{{item.Kind}}</td>
+					<td>{{item.Where}}</td>
+					<td>{{item.Project}}</td>
+					<td>{{item.User}}</td>
+				</tr>
+				<tr v-for="(item,index) in List4" class="tr1"  v-if="m <= index && index <= n">
+					<td><a href="设备信息.html">{{item.ID}}</a></td>
+					<td>{{item.Name}}</td>
+					<td>{{item.Kind}}</td>
+					<td>{{item.Where}}</td>
+					<td>{{item.Project}}</td>
+					<td>{{item.User}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="BUTTON">
+				<button @click="Click1()" class="btn1"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></button>
+
+				<select class="btn2" v-model="Yeshu" v-if="Sel4 == Sel1">
+					<option v-for="(item,index) in list2" @click="Click3(index)">{{item}}</option>
+				</select>
+				<select class="btn2" v-model="Yeshu" v-if="Sel4 == Sel2">
+					<option v-for="(item,index) in list3" @click="Click3(index)">{{item}}</option>
+				</select>
+				<select class="btn2" v-model="Yeshu" v-if="Sel4 == Sel3">
+					<option v-for="(item,index) in list4" @click="Click3(index)">{{item}}</option>
+				</select>
+				<button @click="Click2()" class="btn1" style="float:right;"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
+			</div>
+		</div>
+		</div>
+	</div>
+<script type="text/javascript">
+		var vm = new Vue({
+			el:'#app',
+			data:{
+				list:[
+					{ID:001, Name:'方形/圆形真空干燥机',Kind:'User',Where:'实验室001',Project:'WC',User:'Lee'},
+					{ID:0023, Name:'颗粒粉碎机 ',Kind:'User',Where:121,Project:'WC',User:'Zee'},
+					{ID:1213, Name:'摄像头',Kind:'User',Where:123,Project:'WC',User:'Wee'},
+					{ID:1232, Name:'颗粒粉碎机 ',Kind:'User',Where:123,Project:'WC',User:'Mee'},
+					{ID:123, Name:'刮刀涂布机',Kind:'User',Where:121,Project:'WC',User:'Lee'},
+					{ID:123, Name:'医药专用沸腾干燥机',Kind:'User',Where:121,Project:'WC',User:'Zee'},
+					{ID:123, Name:'颗粒粉碎机',Kind:'User',Where:123,Project:'WC',User:'Wee'},
+					{ID:123, Name:'颗粒粉碎机',Kind:'User',Where:123,Project:'WC',User:'Mee'},
+					{ID:123, Name:'颗粒粉碎机',Kind:'User',Where:121,Project:'WC',User:'Lee'},
+					{ID:123, Name:'颗粒粉碎机',Kind:'User',Where:121,Project:'WC',User:'Zee'},
+					{ID:123, Name:'JJJJJk',Kind:'User',Where:123,Project:'WC',User:'Wee'},
+					{ID:123, Name:'JJkkkJJ',Kind:'User',Where:123,Project:'WC',User:'Mee'},
+					{ID:123, Name:'JJJJJJ',Kind:'User',Where:121,Project:'WC',User:'Lee'},
+					{ID:123, Name:'颗粒粉碎机',Kind:'User',Where:121,Project:'WC',User:'Zee'},
+					{ID:123, Name:'JJJJJk',Kind:'User',Where:123,Project:'WC',User:'Wee'},
+					{ID:123, Name:'JJkkkJJ',Kind:'User',Where:123,Project:'WC',User:'Mee'},
+					{ID:123, Name:'JJJJJJ',Kind:'User',Where:121,Project:'WC',User:'Lee'},
+					{ID:123, Name:'KKKKKKK',Kind:'User',Where:121,Project:'WC',User:'Zee'},
+					{ID:123, Name:'JJJJJk',Kind:'User',Where:123,Project:'WC',User:'Wee'},
+					{ID:123, Name:'JJkkkJJ',Kind:'User',Where:123,Project:'WC',User:'Mee'},
+				],
+				EndTime:[],
+				list1:[],
+				m:0,
+				n:0,
+				// c:0,
+				Sel1:'使用位置',
+				Sel2:'项目名称',
+				Sel3:'设备名称',
+				Sel4:'',
+				S:0,
+				text:'',
+				Yeshu:0,
+				List2:[],
+				list2:[],
+				List3:[],
+				list3:[],
+				List4:[],
+				list4:[],
+			},
+			created:function(){
+				this.initData(null);
+			},
+			methods:{
+				initData(){
+					var a = Math.ceil(this.list.length/10);
+					// console.log(a);
+					for(var i = 0; i< a;i++){
+						this.list1[i] = i+1;
+					}
+					// console.log(this.list1);
+					// this.m = 0;
+					// this.n = 9;
+					// this.c = Math.ceil(this.n/10);
+					this.Sel4 = this.Sel1;
+					// this.Yeshu = this.list1[0];
+
+
+				},
+				Click1(){
+					if(this.m>0){
+						this.m = this.m - 7;
+						this.Yeshu = this.Yeshu -1;
+					}else{
+						this.m = 0;
+					}
+					this.n = this.m + 6;
+				},
+				Click2(){
+					if(this.n < this.list.length-1){
+						this.n = this.n + 7;
+						this.m = this.n - 6;
+						this.Yeshu = this.Yeshu+1;
+					}else{
+						var k = this.list.length%7;
+						this.n = this.list.length - 1;
+						this.m = this.n-k+1;
+						// console.log(this.n);
+						// console.log(this.m);
+					}
+
+
+				},
+				Click3(index){
+					// var h = index + 1;
+					// this.n = h * 10 - 1;
+					// this.m = this.n - 9;
+					// this.c = Math.floor(this.n/10) + 1;
+					var h = index + 1;
+					this.n = h * 7 - 1;
+					this.m = this.n - 6;
+					this.Yeshu = h;
+
+				},
+				Select(){
+					console.log(this.Sel4 + this.Sel3);
+					this.S = 1;
+					if(this.Sel4 == this.Sel1){
+						for(var i = 0; i<this.list.length;i++){
+							if(this.text == this.list[i].Where){
+								for(var l = 0; l<i;l++){
+									this.List2[l] = this.list[i];
+								}
+
+							}
+						}
+						var a = Math.ceil(this.List2.length/7);
+					// console.log(a);
+					for(var i = 0; i< a;i++){
+						this.list2[i] = i+1;
+					}
+					this.m = 0;
+					this.n = 6;
+					this.Yeshu = this.list2[0];
+					}
+
+					if(this.Sel4 == this.Sel2){
+						for(var i = 0; i<this.list.length;i++){
+							if(this.text == this.list[i].Project){
+								for(var l = 0; l<i;l++){
+									this.List3[l] = this.list[i];
+								}
+
+							}
+						}
+						var a = Math.ceil(this.List3.length/7);
+					// console.log(a);
+					for(var i = 0; i< a;i++){
+						this.list3[i] = i+1;
+					}
+					this.m = 0;
+					this.n = 6;
+					this.Yeshu = this.list3[0];
+					}
+
+					if(this.Sel4 == this.Sel3){
+						for(var i = 0; i<this.list.length;i++){
+							if(this.text == this.list[i].User){
+								for(var l = 0; l<i;l++){
+									this.List4[l] = this.list[i];
+								}
+
+							}
+						}
+						var a = Math.ceil(this.List4.length/7);
+					// console.log(a);
+					for(var i = 0; i< a;i++){
+						this.list4[i] = i+1;
+					}
+					this.m = 0;
+					this.n = 6;
+					this.Yeshu = this.list4[0];
+					}
+				}
+
+			}
+		})
+	</script>
+</body>
+</html>

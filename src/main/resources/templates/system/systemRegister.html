@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div style="width: 300px;margin-left: 600px;">
+    <form th:action="@{/system/register}" method="post">
+        <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+        密钥：<input type="password" name="secretkey"><br>
+        账号：<input type="text" name="username"><br>
+        系统管理员1：<br>
+        密码：<input type="password" name="password1"><br>
+        姓名：<input type="text" name="name1"><br>
+        性别：<select name="gender1">
+        <option value="男">男</option>
+        <option value="女">女</option>
+    </select><br>
+        项目组：<input type="text" name="projectteam1"><br>
+        部门：<input type="text" name="department1"><br>
+        电子邮箱：<input type="text" name="email1"><br>
+        系统管理员2：<br>
+        密码：<input type="password" name="password2"><br>
+        姓名：<input type="text" name="name2"><br>
+        性别：<select name="gender2">
+        <option value="男">男</option>
+        <option value="女">女</option>
+    </select><br>
+        项目组：<input type="text" name="projectteam2"><br>
+        部门：<input type="text" name="department2"><br>
+        电子邮箱：<input type="text" name="email2"><br>
+        <input type="submit" value="注册">
+    </form>
+</div>
+</body>
+</html>

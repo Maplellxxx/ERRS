@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+	<script src="js/vector.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts-en.common.js"></script>
+	<style>
+		#app{
+			width:100%;
+		}
+		#Tu1{
+			width:70%;
+			height:300px;
+			position: absolute;
+			left:5%;
+			/*background-color: gray;*/
+			height:500px;
+			float:left;
+			border:2px solid #f0f0f0;
+		}
+		#Tu2{
+			width:15%;
+			height:225px;
+			position: absolute;
+			float:right;
+			right:5%;
+			background-color: rgba(0,0,0,0);
+			border:2px solid #f0f0f0;
+		}
+		#Tu3{
+			width:15%;
+			height:225px;
+			position: absolute;
+			float:right;
+			right:5%;
+			top:283px;
+			background-color: rgba(0,0,0,0);
+			border:2px solid #f0f0f0;
+		}
+		#Tu4{
+			background-color: rgba(0,0,0,0);
+			height:400px;
+			width:80%;
+			position: absolute;
+			float:left;
+			top:550px;
+			left:5%;
+		}
+		#Tu4-1{
+			background-color: rgba(0,0,0,0);
+			height:100px;
+			width:10%;
+			position: absolute;
+			float:right;
+			top:550px;
+			right:5%;
+		}
+		#Tu5-1{
+			background-color: rgba(0,0,0,0);
+			height:100px;
+			width:10%;
+			position: absolute;
+			float:right;
+			top:1150px;
+			right:5%;
+		}
+		#Tu5{
+			background-color: rgba(0,0,0,0);
+			height:400px;
+			width:80%;
+			position: absolute;
+			float:left;
+			top:1150px;
+			left:5%;
+		}
+		#btn{
+			width:50px;
+			height:25px;
+			border:1px solid #c0c0c0;
+			background-color: white;
+		}
+	</style>
+</head>
+<body>
+<br><br>
+	<div id="app">
+		<div id="Tu1">
+			
+		</div>
+		<div id="Tu2">
+			
+		</div>
+		<div id="Tu3">
+			
+		</div>
+		<!--<div id="Tu4">-->
+			<!---->
+		<!--</div>-->
+		<!--<div id="Tu4-1">-->
+			<!--<button id="btn" @click="YUE" v-if="y == 0">月</button>-->
+			<!--<button id="btn" @click="RI" v-if="r == 1">日</button>-->
+		<!--</div>-->
+		<!--<div id="Tu5">-->
+			<!---->
+		<!--</div>-->
+		<!--<div id="Tu5-1">-->
+			<!--<button id="btn" @click="YUE1" v-if="y1 == 0">月</button>-->
+			<!--<button id="btn" @click="RI1" v-if="r1 == 1">日</button>-->
+		<!--</div>-->
+	</div>
+
+	<script th:inline="javascript">
+		var vm = new Vue({
+			el:'#app',
+			data:{
+				y:0,
+				r:0,
+				y1:0,
+				r1:0
+			},
+			methods:{
+				YUE(){
+					this.y = 1;
+					this.r = 1;
+					myChart1.setOption(option2);
+				},
+				RI(){
+					this.y = 0;
+					this.r = 0;
+					myChart1.setOption(option1);
+				},
+				YUE1(){
+					this.y1 = 1;
+					this.r1 = 1;
+					myChart2.setOption(option2);
+				},
+				RI1(){
+					this.y1 = 0;
+					this.r1 = 0;
+					myChart2.setOption(option1);
+				}
+			}
+		})
+
+
+
+
+
+		var week = [];
+		for(var i = 0; i <= 31; i++){
+			week[i] = i;
+		}
+		// console.log(week[i]);
+		var myChart = echarts.init(document.getElementById('Tu1'));
+		// var week = ['1','2','3','4','5','6','7'];
+		var option = {
+			title:{
+				text:'每月的用户状况',
+				// x:'center',
+			},
+			tooltip:{
+
+			},
+			toolbox: {
+					show : true,
+					 // grid:[
+						// 	{ x:'20%',x2:'10%'}
+      //       			],
+					feature : {
+							// dataView : {show: true, readOnly: false},
+							// magicType : {show: true, type: ['line', 'bar']},
+							// restore : {show: true},
+							saveAsImage : {show: true}
+						}
+					},
+			legend: {
+		        data:['登录次数','预约时长']
+		    },
+		    xAxis: {
+		    	boundaryGap: false,
+		        type: 'category',
+		        // data: data,
+		        data:week,
+		    },
+		    yAxis: {
+		        type: 'value'
+		    },
+		    series: [
+		    {
+		    	name:'登录次数',
+		       	data: [220, 132, 201, 134, 190, 330, 120, 300, 200, 112, 182, 132, 301, 134, 190, 130, 320, 100, 200, 112,120, 132, 101, 134, 190, 130, 132, 100, 120, 112,212,223,233],
+        		type: 'line'
+		    },
+		    {
+		    	name:'预约时长',
+		    	data: [100,200,300,400,90,80,50,70,80,100,200,300,245,230,340,430,230,340,90,120,200,300,400,230,340,430,230,340,90,120,200,300],
+        		type: 'line'
+		    }
+		    ]
+		};
+
+		myChart.setOption(option);
+
+
+		var myChart = echarts.init(document.getElementById('Tu2'));
+		var option = {
+		    title : {
+		        text: '当前设备状况',
+		        // subtext: '纯属虚构',
+		        x:'center'
+		    },
+		    tooltip : {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+		    },
+		    series : [
+		        {
+		            name: '设备数量',
+		            type: 'pie',
+		            radius : '70%',
+		            center: ['50%', '60%'],
+		            label: {
+		                normal: {
+		                    show: false,
+		                    position: 'center'
+		                }
+		            },
+		            labelLine: {
+		                normal: {
+		                    show: false
+		                }
+		            },
+		            data:[
+		                {value:[[${equipmentRun}]], name:'启用'},
+		                {value:[[${equipmentPause}]], name:'停用'},
+		                {value:[[${equipmentB}]], name:'报废'},
+		            ],
+		            itemStyle: {
+		                emphasis: {
+		                    shadowBlur: 10,
+		                    shadowOffsetX: 0,
+		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+		                }
+		            }
+		        }
+		    ]
+		};
+		myChart.setOption(option);
+
+		var myChart = echarts.init(document.getElementById('Tu3'));
+		var option = {
+		    title : {
+		        text: '当前项目状况',
+		        // subtext: '纯属虚构',
+		        x:'center'
+		    },
+		    tooltip : {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+		    },
+		    series : [
+		        {
+		            name: '项目数量',
+		            type: 'pie',
+		            radius : '70%',
+		            center: ['50%', '60%'],
+		            label: {
+		                normal: {
+		                    show: false,
+		                    position: 'center'
+		                }
+		            },
+		            labelLine: {
+		                normal: {
+		                    show: false
+		                }
+		            },
+		            data:[
+		                {value:15, name:'进行中'},
+		                {value:10, name:'暂停'},
+		                {value:22, name:'完成'},
+		            ],
+		            itemStyle: {
+		                emphasis: {
+		                    shadowBlur: 10,
+		                    shadowOffsetX: 0,
+		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+		                }
+		            }
+		        }
+		    ]
+		};
+		myChart.setOption(option);
+
+		// var month = 3;
+		// var day = [];
+		// if(month == 2){
+		// 	for(var i = 1; i<=28; i++){
+		// 		day[i] = ''+month+'-'+i;
+		// 	}
+		// }
+		//
+		// if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 ){
+		// 	for(var i = 1; i<=31;i++){
+		// 		day[i-1] = ''+month+'-'+i;
+		// 	}
+		// }
+		// if(month == 4 || month == 6 || month == 9 || month == 11){
+		// 	for(var i = 1; i<=30;i++){
+		// 		day[i] = ''+month+'-'+i;
+		// 	}
+		// }
+		// console.log(day);
+		// var myChart1 = echarts.init(document.getElementById('Tu4'));
+		// var option1 = {
+		// 	title : {
+		//         text: '预约项目数量（日）',
+		//         // subtext: '纯属虚构',
+		//         x:'center'
+		//     },
+		// 	    xAxis: {
+		// 	        type: 'category',
+		// 	        data: day
+		// 	    },
+		// 	    yAxis: {
+		// 	        type: 'value'
+		// 	    },
+		// 	    series: [{
+		// 	        data: [120, 232, 101, 234, 290, 330, 320],
+		// 	        type: 'line',
+		// 	        smooth: true
+		// 	    }]
+		// 	};
+		// 	var option2 = {
+		// 		title : {
+		//         text: '预约项目数量（月）',
+		//         // subtext: '纯属虚构',
+		//         x:'center'
+		//     },
+		// 	    xAxis: {
+		// 	        type: 'category',
+		// 	        data: [1,2,3,4,5,6,7,8,9,10,11,12]
+		// 	    },
+		// 	    yAxis: {
+		// 	        type: 'value'
+		// 	    },
+		// 	    series: [{
+		// 	        data: [20, 12, 11, 14, 10, 13, 10],
+		// 	        type: 'line',
+		// 	        smooth: true
+		// 	    }]
+		// 	};
+		// 	myChart1.setOption(option1);
+			
+			// var month = 3;
+			// var day = [];
+			// if(month == 2){
+			// 	for(var i = 1; i<=28; i++){
+			// 		day[i] = ''+month+'-'+i;
+			// 	}
+			// }
+			//
+			// if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 ){
+			// 	for(var i = 1; i<=31;i++){
+			// 		day[i-1] = ''+month+'-'+i;
+			// 	}
+			// }
+			// if(month == 4 || month == 6 || month == 9 || month == 11){
+			// 	for(var i = 1; i<=30;i++){
+			// 		day[i] = ''+month+'-'+i;
+			// 	}
+			// }
+			// // console.log(day);
+			// var myChart2 = echarts.init(document.getElementById('Tu5'));
+			// var option1 = {
+			// 	title : {
+			//         text: '预约人数数量（日）',
+			//         // subtext: '纯属虚构',
+			//         x:'center'
+			//     },
+			// 	    xAxis: {
+			// 	        type: 'category',
+			// 	        data: day
+			// 	    },
+			// 	    yAxis: {
+			// 	        type: 'value'
+			// 	    },
+			// 	    series: [{
+			// 	        data: [20, 32, 31, 34, 290, 330, 320],
+			// 	        type: 'line',
+			// 	        smooth: true
+			// 	    }]
+			// 	};
+			// 	var option2 = {
+			// 		title : {
+			//         text: '预约人数数量（月）',
+			//         // subtext: '纯属虚构',
+			//         x:'center'
+			//     },
+			// 	    xAxis: {
+			// 	        type: 'category',
+			// 	        data: [1,2,3,4,5,6,7,8,9,10,11,12]
+			// 	    },
+			// 	    yAxis: {
+			// 	        type: 'value'
+			// 	    },
+			// 	    series: [{
+			// 	        data: [20, 32, 51, 34, 29, 30, 32],
+			// 	        type: 'line',
+			// 	        smooth: true
+			// 	    }]
+			// 	};
+			// 	myChart2.setOption(option1);
+	</script>
+	
+</body>
+</html>

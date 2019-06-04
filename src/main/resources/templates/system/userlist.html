@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/system/index}">系统管理员主页</a>
+<a th:href="@{/cancel}">注销</a>
+<br>
+<table border="1">
+    <tr>
+        <td>id</td>
+        <td>用户名</td>
+        <td>密码</td>
+        <td>权限</td>
+        <td>姓名</td>
+        <td>性别</td>
+        <td>项目组</td>
+        <td>部门</td>
+        <td></td>
+    </tr>
+    <tr th:each="i:${info}">
+        <td>[[${i.id}]]</td>
+        <td><a th:href="@{/system/userinfo/}+${i.id}" th:text="${i.username}"></a></td>
+        <td>[[${i.password}]]</td>
+        <td>[[${i.authority}]]</td>
+        <td>[[${i.name}]]</td>
+        <td>[[${i.gender}]]</td>
+        <td>[[${i.projectteam}]]</td>
+        <td>[[${i.department}]]</td>
+        <td><a th:href="@{/system/deleteUser/}+${i.id}"><button>删除</button></a></td>
+    </tr>
+</table>
+<!--<table border="1" align="center">-->
+    <!--<tr>-->
+        <!--<td>id</td>-->
+        <!--<td>用户名</td>-->
+        <!--<td>密码</td>-->
+        <!--<td style="text-align: center">操作</td>-->
+    <!--</tr>-->
+    <!--<tr th:each="i:${info}">-->
+        <!--<td th:text="${i.id}"></td>-->
+        <!--<td><a th:href="@{/user/}+${i.id}" th:text="${i.username}"></a></td>-->
+        <!--<td th:text="${i.password}"></td>-->
+        <!--<td>-->
+            <!--<a th:href="@{/updateUser/}+${i.id}"><button>编辑</button></a>-->
+            <!--<a th:href="@{/deleteUser/}+${i.id}"><button>删除</button></a>-->
+        <!--</td>-->
+
+    <!--</tr>-->
+<!--</table>-->
+</body>
+</html>

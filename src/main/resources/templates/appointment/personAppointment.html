@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+[[${username}]]
+<table border="1">
+    <tr>
+        <td>id</td>
+        <td>projectID</td>
+        <td>equipmentID</td>
+        <td>date</td>
+        <td>time</td>
+    </tr>
+    <tr th:each="t:${times}">
+        <td>[[${t.id}]]</td>
+        <td>[[${t.projectID}]]</td>
+        <td>[[${t.equipmentID}]]</td>
+        <td>[[${t.date}]]</td>
+        <td>[[${t.time}]]</td>
+    </tr>
+
+</table>
+
+
+</body>
+</html>

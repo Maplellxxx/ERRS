@@ -1,0 +1,71 @@
+
+.register{
+	width: 60%;
+	height:450px;
+	background-color:white;
+	margin-left:20%;
+	margin-top:20px;
+	padding-top:10px;
+	outline:#d9dfe6 solid 1px;
+	}
+
+.stepy-tab {
+    text-align: center;
+}
+
+.stepy-tab ul{
+    display: inline-block;
+}
+
+.stepy-tab ul li {
+    float: left;
+}
+
+.stepy-titles li {
+    color: white;
+    cursor: pointer;
+    float: left;
+    margin: 10px 15px;
+}
+
+.stepy-titles li span { display: block; }
+
+.stepy-titles li.current-step div {
+    color: #fff;
+    cursor: auto;
+    background: #39b3d7;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+}
+
+.stepy-titles li div{
+    font-size:16px;
+    font-weight: 300;
+    background: #eee;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+}
+.button-back {
+    float: left;
+}
+
+.button-next, .finish {
+    float: right;
+}
+
+.button-back, .button-next, .finish {
+    cursor: pointer;  text-decoration: none;
+}
+
+.step {
+    clear: left;
+}
+.step label {
+    display: block;
+}

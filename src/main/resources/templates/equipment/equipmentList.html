@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="https://unpkg.com/vue/dist/vue.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+</head>
+<body>
+<a th:href="@{/main.html}">主页</a>
+<a th:href="@{/userinfo/}+${session.loginUser}" th:if="${#strings.isEmpty(session.systemAdmin)}">个人中心</a>..
+<a th:href="@{/cancel}">注销</a>
+<br>
+设备列表：
+<div id="app">
+
+    <p>{{message}}</p>
+    <table border="1">
+        <tr>
+            <td>id</td>
+            <td>编号</td>
+            <td>名称</td>
+            <td>品牌</td>
+            <td>型号</td>
+            <td>使用位置</td>
+            <td>预约</td>
+            <td th:if="${not #strings.isEmpty(session.admin)}">当前状态</td>
+            <td th:if="${not #strings.isEmpty(session.admin)}">操作</td>
+        </tr>
+        <tr v-for='(item,index) in list'>
+            <td>{{item.id}}</td>
+            <td>
+                <a href="javascript:void(0);" @click="click1(index)">{{item.number}}</a>
+
+            </td>
+            <td>{{item.name}}</td>
+            <td>{{item.brand}}</td>
+            <td>{{item.model}}</td>
+            <td>{{item.location}}</td>
+            <!--<td><input type="button" @click="click4(index)" value="预约"></td>-->
+            <td>
+                <input type="submit" v-model="btn4" v-if="item.state==='启用'" @click="click4(index)" value="预约">
+                <div v-else></div>
+            </td>
+            <td th:if="${not #strings.isEmpty(session.admin)}">{{item.state}}</td>
+            <td th:if="${not #strings.isEmpty(session.admin)}">
+
+                <input type="submit" v-model="btn1"  v-if="item.state ==='停用'" @click="click2(index)">
+                <input type="submit" v-model="btn2"  v-else-if="item.state ==='启用'" @click="click2(index)">
+                <div v-else>无法使用</div>
+
+                <input type="submit" v-model="btn3"  v-if="item.state ==='停用'" @click="click3(index)">
+                <input type="submit" v-model="btn3"  v-else-if="item.state ==='启用'" @click="click3(index)">
+                <div v-else></div>
+
+
+
+            </td>
+        </tr>
+    </table>
+</div>
+<a th:if="${not #strings.isEmpty(session.admin)}" th:href="@{/admin/equipment/add}">添加</a>
+
+<!--[[${info}]]-->
+
+<script th:inline="javascript">
+
+    this.id = [[${id}]]
+    new Vue({
+        el: '#app',
+        data: {
+            btn1:'启用',
+            btn2:'停用',
+            btn3:'报废',
+            btn4:'预约',
+            list: [[${info}]],
+            msg:1
+        },
+        methods:{
+            click1(index){
+                window.location.href="/equipment/"+this.list[index].id
+            },
+            click2(index){
+                window.location.href="/admin/equipment/changeState/"+this.list[index].id
+            },
+            click3(index){
+                window.location.href="/admin/equipment/scrap/"+this.list[index].id
+            },
+            click4(index){
+                window.location.href="/appointment/"+this.list[index].id+"/today"
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+	<script src="js/vector.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts-en.common.js"></script>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="CSS/projectList.css" rel="stylesheet">
+	<script src="Test/vue.min.js"></script>
+	<style>
+		*{
+			margin:0px;
+			padding:0px;
+		}
+		.active{
+			color:#007ec7;
+		}
+		.btn1{
+			width:100px;
+			height:100%;
+			border:none;
+			background-color: rgba(0,0,0,0);
+			font-size: 30px;
+			float:left;
+			color:#007ec7;
+		}
+		.BUTTON{
+			width:400px;
+			height:50px;
+			background-color: rgba(0,0,0,0);
+			text-align: center;
+			margin-left:30%;
+		}
+		.btn2{
+			width:50px;
+			height:100%;
+			font-size: 18px;
+			background-color: rgba(0,0,0,0);
+			border:none;
+			
+			/*float:left;*/
+		}
+		/*.tr1{
+			background-color: #ebf9ff;
+		}*/
+		.Btn1{
+			width:25px;
+			height:25px;
+			border-radius: 50%;
+			border:none;
+			font-size: 15px;
+			background-color: rgba(0,0,0,0);
+			/*color:white;*/
+		}
+	</style>
+</head>
+<body style="background-color: rgba(0,0,0,0);">
+	<div class="container" style="margin-top: 10px;">
+	        <div class="wd-header">
+                <div class="tabbable">
+                
+                    <ul class="nav nav-tabs">
+
+						<li class="wd-tab1 active">
+							<a th:href="@{/user/appointment/}+${session.loginUser}" data-toggle="tab" style="background-color: #f0f0f0;border:2px solid white;border-bottom-style: none;">预约记录</a>
+						</li>
+						<li class="wd-tab2">
+							<a href="http://localhost:8080/appointment/InsertionRequired" data-toggle="tab">收到请求</a>
+						</li>
+						<li class="wd-tab3">
+							<a href="http://localhost:8080/appointment/myInsertionRequired" data-toggle="tab" >个人申请</a>
+						</li>
+                    </ul>
+                </div>
+            </div>
+		
+		<div class="table-responsive">
+	<table class="table table-striped table-bordered table-hover" style="background-color: white;">
+	<thead>
+	<tr>
+	<th>设备编号</th>
+		<th>设备名称</th>
+			<th>设备型号</th>
+			<th>设备地点</th>
+				<th>日期</th>
+					<th>时间</th>
+					<th>项目名称</th>
+					<th><center>状态</center></th>
+
+		
+	</tr>
+	</thead>
+<tbody>
+<tr v-for="(item,index) in list" v-if="m <= index && index <= n">
+	<td>{{item.info1}}</td>
+	<td>{{item.info2}}</td>
+	<td>{{item.info3}}</td>
+	<td>{{item.info4}}</td>
+	<td>{{item.info5}}</td>
+	<td>{{item.info6}}:00</td>
+	<td>{{item.info7}}</td>
+   	<!--<td><center><span class="label label-info">{{item.info8}}</span></center></td>-->
+	<td style="text-align: center;">
+		<span class="label label-info" style="background-color: #B3EE3A;" v-if="item.info8 == '已完成'">{{item.info8}}</span>
+		<span class="label label-info" v-if="item.info8 == '未完成'">{{item.info8}}</span>
+	</td>
+	</tr>
+</tbody>
+	</table>
+	</div>
+	<div class="BUTTON">
+		<button @click="Click1()" class="btn1"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></button>
+		<button v-for="(item,index) in list1" @click="Click3(index)" v-bind:class="{'active': c == index + 1}" class="btn2">{{item}}</button>
+		<button @click="Click2()" class="btn1" style="float:right;"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
+	</div>
+</div>
+	<script th:inline="javascript">
+		var vm = new Vue({
+			el:'.container',
+			data:{
+				list:[[${times}]],
+				EndTime:[],
+				list1:[],
+				m:0,
+				n:0,
+				c:0
+			},
+			created:function(){
+				this.initData(null);
+			},
+			methods:{
+				initData(){
+					for(var i = 0; i<this.list.length; i++){
+						// console.log(this.list[i].StartTime);
+						this.EndTime[i] = this.list[i].StartTime + 1;
+
+					}
+					var a = Math.ceil(this.list.length/15);
+					// console.log(a);
+					for(var i = 0; i< a;i++){
+						this.list1[i] = i+1;
+					}
+					// console.log(this.list1);
+					this.m = 0;
+					this.n = 14;
+					this.c = Math.ceil(this.n/15);
+
+
+				},
+				Click1(){
+					if(this.m>0){
+						this.m = this.m - 15;
+						this.c = this.c -1;
+					}else{
+						this.m = 0;
+					}
+					this.n = this.m + 14;
+				},
+				Click2(){
+					if(this.n < this.list.length-1){
+						this.n = this.n + 15;
+						this.m = this.n - 14;
+						this.c = this.c+1;
+					}else{
+						var k = this.list.length%15;
+						this.n = this.list.length - 1;
+						this.m = this.n-k+1;
+						// console.log(this.n);
+						// console.log(this.m);
+					}
+					
+
+				},
+				Click3(index){
+					// var h = index + 1;
+					// this.n = h * 10 - 1;
+					// this.m = this.n - 9;
+					// this.c = Math.floor(this.n/10) + 1;
+					var h = index + 1;
+					this.n = h * 15 - 1;
+					this.m = this.n - 14;
+					this.c = h;
+	
+				},
+
+			}
+		})
+	</script>
+</body>
+</html>

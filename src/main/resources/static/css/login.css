@@ -1,0 +1,108 @@
+
+.body{
+   background: url(../image/login.jpg);
+   background-size:100% 100%;
+   width:100%;
+   /*height:836px;*/
+}
+
+.login{
+background-color:white;
+width:330px;
+height:300px;
+position:relative;
+left:970px;
+top:180px;
+border-radius:8px;
+padding-top:40px;
+/*box-shadow:1px 2px 3px 2px #edf3fb ;*/
+
+
+}
+.login-choose{
+height:40px;
+width:350px;
+margin-left:10px;
+margin-top:-20px;
+}
+
+.login-choose ul
+{
+list-style-type:none;
+margin:0;
+padding:0;
+overflow:hidden;
+}
+
+.login-choose li
+{
+float:left;
+}
+
+.login-choose .a1:link, .login-choose .a1:visited
+{
+display:block;
+height:30px;
+width:150px;
+font-weight:bold;
+color:#c5cdda;
+border-bottom:1px solid #dbe1ea;
+text-align:center;
+text-decoration:none;
+text-transform:uppercase;
+}
+
+.login-choose .a1:hover, .login-choose .a1:active
+{
+color:black;
+background-color:white;
+border-bottom:2px solid #2075f6;
+}
+
+.login input{
+  border-radius:1px;
+  width:270px;
+}
+.login button {
+    background-color: #2075f6; 
+    border: none;
+    color: white;
+	width:280px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    cursor: pointer;
+	border-radius: 2px;
+}
+.btn-login:hover{
+background-color: #428cfb;
+
+}
+
+.input-control{
+margin:15px auto;
+padding-left:20px;
+
+}
+.regist{
+padding-left:225px;
+
+}
+.regist a:link, .regist a:visited
+{
+font-weight:bold;
+color:#5c99f4;
+text-decoration:none;
+}
+
+.regist a:hover, .regist a:active
+{
+color:#2075f6;
+
+}
+</style>

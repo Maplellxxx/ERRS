@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/system/index}">系统管理员主页</a>
+<a th:href="@{/cancel}">注销</a>
+<br>
+<h1>信息总览</h1>
+<br>
+id:[[${user.id}]]
+<br>
+用户名:[[${user.username}]]
+<br>
+密码: [[${user.password}]]
+<br>
+权限：[[${user.authority}]]
+<br>
+姓名：[[${user.name}]]
+<br>
+性别：[[${user.gender}]]
+<br>
+项目组:[[${user.projectteam}]]
+<br>
+部门:[[${user.department}]]
+<br>
+<!--<a th:href="@{/system/updateUser/}+${user.id}"><button>编辑</button></a>-->
+<a th:href="@{/system/updateUser/}+${user.id}"><input type="button" value="编辑"></a>
+
+</body>
+</html>

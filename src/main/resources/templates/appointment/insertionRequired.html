@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <td>id</td>
+        <td>用户名</td>
+        <td>项目id</td>
+        <td>设备id</td>
+        <td>日期</td>
+        <td>时间</td>
+        <td>原因</td>
+        <td>状态</td>
+        <td>原预约人</td>
+        <td>操作</td>
+    </tr>
+    <tr th:each="i:${insertion}">
+        <td>[[${i.id}]]</td>
+        <td><a th:href="@{/userinfo/}+${i.username}">[[${i.username}]]</a></td>
+        <td><a th:href="@{/project/info/id/}+${i.projectID}">[[${i.projectID}]]</a></td>
+        <td><a th:href="@{/equipment/}+${i.equipmentID}">[[${i.equipmentID}]]</a></td>
+        <td>[[${i.date}]]</td>
+        <td>[[${i.time}]]</td>
+        <td>[[${i.reason}]]</td>
+        <td>[[${i.result}]]</td>
+        <td>[[${i.original}]]</td>
+        <td>
+            <a th:href="@{/allowRequired/}+${i.id}" th:if="${i.result} eq '审核中'"><button>通过</button></a>
+            <a th:href="@{/denyRequired/}+${i.id}" th:if="${i.result} eq '审核中'"><button>拒绝</button></a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

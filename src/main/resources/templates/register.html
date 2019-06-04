@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div style="width: 300px;margin-left:600px;">
+    <center><h3>注册</h3></center>
+    <form th:action="@{/register}" method="post">
+        <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+        <input class="form-control" type="text" name="username" placeholder="请输入账号" required="required"><br>
+        <input class="form-control" type="password" name="password1" placeholder="请输入密码" required="required"><br>
+        <input class="form-control" type="password" name="password2" placeholder="再次输入密码" required="required"><br>
+        <input class="form-control" type="text" name="name" placeholder="姓名" required="required"><br>
+        <input class="form-control" type="text" name="gender" placeholder="性别" required="required"><br>
+        <input class="form-control" type="text" name="projectteam" placeholder="项目组" required="required"><br>
+        <input class="form-control" type="text" name="department" placeholder="部门" required="required"><br>
+        <input class="form-control" type="text" name="email" placeholder="电子邮箱" required="required"><br>
+        <input class="btn btn-success" type="submit" value="注册"><br>
+    </form>
+</div>
+</body>
+</html>

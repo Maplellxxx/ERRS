@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/projectlist}">项目列表</a><br>
+编号：[[${info.number}]]<br>
+项目名称：[[${info.name}]]<br>
+开始时间：[[${info.starttime}]]<br>
+<div th:if="${not #strings.isEmpty(info.stoptime)}">完成时间：[[${info.stoptime}]]</div>
+状态：[[${info.state}]]<br>
+发起人：[[${info.originator}]]<br>
+项目管理员：<p1 th:each="i:${ProjectAdmin}">[[${i.username}]] </p1>
+<br>
+<!--<a th:href="@{/projectRun/}+${info.id}" th:if="${not #strings.isEmpty(a)}"><button>进行</button></a>-->
+<!--<a th:href="@{/projectPause/}+${info.id}" th:if="${not #strings.isEmpty(a)}"><button>暂停</button></a>-->
+<!--<a th:href="@{/projectComplete/}+${info.id}" th:if="${not #strings.isEmpty(a)}"><button>项目完成</button></a>-->
+<div th:if="${not #strings.isEmpty(a)}">
+    <a th:href="@{/projectRun/}+${info.id}" th:if="${info.state} eq '暂停'"><button>进行</button></a>
+    <a th:href="@{/projectPause/}+${info.id}" th:if="${info.state} eq '进行中'"><button>暂停</button></a>
+    <a th:href="@{/projectComplete/}+${info.id}" th:if="${info.state} ne '完成'"><button>项目完成</button></a>
+</div>
+<br>
+<br>
+<div th:if="${not #strings.isEmpty(a)}">
+    添加管理员
+    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+    <form th:action="@{/project/addAdmin/}+${info.number}" method="post">
+        <input type="text" name="username" required="required">
+        <input type="submit" value="添加">
+    </form>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form th:action="@{/admin/equipment/update}" method="post">
+        <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+        ID：<input type="text" disabled="disabled" th:value="${equipment.id}">
+            <input type="hidden" name="id" th:value="${equipment.id}"><br>
+        编号：<input type="text" name="number" th:value="${equipment.number}" required="required"><br>
+        名称：<input type="text" name="name" th:value="${equipment.name}" required="required"><br>
+        品牌：<input type="text" name="brand" th:value="${equipment.brand}" required="required"><br>
+        型号：<input type="text" name="model" th:value="${equipment.model}" required="required"><br>
+        使用位置：<input type="text" name="location" th:value="${equipment.location}" required="required"><br>
+        状态：<select name="state" th:if="${equipment.state} eq '启用'">
+                <option value="启用" selected="selected">启用</option>
+                <option value="停用">停用</option>
+                <option value="报废">报废</option>
+              </select>
+                <select name="state" th:if="${equipment.state} eq '停用'">
+                    <option value="启用">启用</option>
+                    <option value="停用" selected="selected">停用</option>
+                    <option value="报废">报废</option>
+                </select>
+                <select name="state" th:if="${equipment.state} eq '报废'">
+                    <option value="启用">启用</option>
+                    <option value="停用">停用</option>
+                    <option value="报废" selected="selected">报废</option>
+                </select>
+        <input type="submit" value="修改">
+    </form>
+</body>
+</html>

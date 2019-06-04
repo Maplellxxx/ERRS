@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+	<script src="js/vector.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts-en.common.js"></script>
+	<style>
+		*{
+			padding:0px;
+			margin:0px;
+		}
+		.main{
+			width:100%;
+			/*background: #eef5f9;*/
+			/*background-color: #f0f0f0;*/
+			/*overflow-x: hidden;*/
+			/*overflow-y: scroll;*/
+			position: absolute;
+			/*left:150px;*/
+			z-index: 1;
+			/*height:800px;*/
+			/*top:0px;*/
+		}
+		.td3{
+			width:20%;
+			height:40px;
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			font-size: 14px;
+			/*background-color: white;*/
+			border:1px solid #b5b5b5;
+			border-right-style:none;
+			border-left-style:none;
+			/*margin-left: 5px;*/
+			/*border-top-style:none*/
+			/*background-color: #dbdbdb;*/
+		}
+		.li{
+			margin-top: 15px;
+			list-style: none;
+			margin-left: 20px;
+			font-size: 14px;
+		}
+		.T1{
+			background-color:#e9e1a5;
+			width:35%;
+			height:230px;
+			position: absolute;
+			top:200px;
+			left:40px;
+			border-radius: 4px;
+			box-shadow: 2px 2px 1px #d1d1d1;
+
+		}
+		.xiangmu{
+			width:35%;
+			height:230px;
+			background-color: white;
+			position: absolute;
+			top:460px;
+			left:40px;
+			border-radius: 4px;
+			/*float:right;*/
+			box-shadow: 2px 2px 1px #d1d1d1;
+			/*border:3px solid #000000;*/
+		}
+		.Data{
+			width:94%;
+			height:200px;
+			position: absolute;
+			top:0px;
+			left:3%;
+			/*background-color: black;*/
+		}
+		.data1{
+			width:23%;
+			height:150px;
+			position: relative;
+			top:25px;
+			margin-left:0;
+			background-color: rgb(231, 80, 90);
+			float:left;
+			border-radius: 4px;
+		}
+		.data_1{
+			width:100%;
+			height:125px;
+			background-color: rgba(0,0,0,0);
+			border-radius: 4px;
+		}
+		.data_2{
+			width:100%;
+			height:25px;
+			border-radius: 4px;
+		}
+
+
+		.td1{
+			height:40px;
+			font-family: "微软雅黑";
+			font-size: 16px;
+			background-color: white;
+			border:1px solid lightgray;
+			border-right-style:none;
+			border-left-style:none;
+			margin-left: 5px;
+			border-bottom:#b5b5b5 solid 2px;
+
+		}
+		hr{
+			height:1px;
+			border:none;
+			background-color: #C0C0C0;
+		}
+		.tr1{
+			background-color: #e6e6e6;
+		}
+		.tr1:hover{
+			background-color: #a3a3a3;
+
+		}
+		.tr2{
+			background-color:white;
+		}
+		.tr2:hover{
+			background-color: #c0c0c0;
+		}
+
+		.td{
+			text-align: center;
+			height:40px;
+			border:1px solid #d8d9da;
+			border-right-style:none;
+			border-left-style:none;
+			/*border:;*/
+		}
+		.tr{
+			/*border:1px solid black;*/
+			background-color: white;
+		}
+		.tr:hover{
+			background-color: #ededed;
+		}
+		#Tu3{
+			width:57%;
+			height:495px;
+			position: absolute;
+			top:200px;
+			float:right;
+			right:40px;
+			background-color: white;
+		}
+
+	</style>
+</head>
+<body>
+<div class="main" :style="Object">
+	<div class="Data">
+		<div class="data1">
+			<div class="data_1">
+				<i class="fas fa-newspaper" style="font-size: 80px;margin-top: 50px;  float:left;color:rgba(255,255,255,0.6);"></i>
+				<p style="font-size: 40px;float:right;margin-top: 30px;margin-right: 10px;color:white;">555</p>
+				<p style="font-size: 18px; float:right;position:absolute; top:75px;right:0px;color:white;">公告信息</p>
+			</div>
+			<div class="data_2" style="background-color: #da343f;">
+				<a href="" style="float:right; margin-right: 20px;color:white;text-decoration: none;">更多信息...</a>
+			</div>
+		</div>
+		<div class="data1" style="background-color: rgb(53, 152, 220); margin-left: 2.65%;">
+			<div class="data_1">
+				<i class="fas fa-microscope" style="font-size: 80px;margin-top: 45px;  float:left;color:rgba(255,255,255,0.6);"></i>
+				<p style="font-size: 40px;float:right;margin-top: 30px;margin-right: 10px;color:white;">[[${equipmentNum}]]</p>
+				<p style="font-size: 18px; float:right;position:absolute; top:75px;right:0px;color:white;">设备数量</p>
+			</div>
+			<div class="data_2" style="background-color: #268acf;">
+				<a href="" style="float:right; margin-right: 20px; color:white;text-decoration: none;">更多信息...</a>
+			</div>
+		</div>
+		<div class="data1" style="background-color:rgb(50, 197, 210);margin-left: 2.65%;">
+			<div class="data_1">
+				<i class="fas fa-poll-h" style="font-size: 80px;margin-top: 50px;  float:left;color:rgba(255,255,255,0.6);"></i>
+				<p style="font-size: 40px;float:right;margin-top: 30px;margin-right: 10px;color:white;">[[${projectNum}]]</p>
+				<p style="font-size: 18px; float:right;position:absolute; top:75px;right:0px;color:white;">当前项目</p>
+			</div>
+			<div class="data_2" style="background-color: #2baab6;">
+				<a href="" style="float:right; margin-right: 20px;color:white;text-decoration: none;">更多信息...</a>
+			</div>
+		</div>
+		<div class="data1" style="background-color: rgb(142, 68, 173);margin-left: 2.65%;">
+			<div class="data_1">
+				<i class="far fa-clock" style="font-size: 80px;margin-top: 50px;  float:left;color:rgba(255,255,255,0.6);"></i>
+				<p style="font-size: 40px;float:right;margin-top: 30px;margin-right: 10px;color:white;">[[${appointmentTime}]]</p>
+				<p style="font-size: 18px; float:right;position:absolute; top:75px;right:0px;color:white;">预约时长</p>
+			</div>
+			<div class="data_2" style="background-color: #753a8d;">
+				<a href="" style="float:right; margin-right: 20px; color:white;text-decoration: none;">更多信息...</a>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="T1" th:if="${t1} eq 0">
+		<p style="position: relative; font-size: 24px; margin-left:20px; margin-top: 10px;">最近预约提醒</p>
+		<br>
+		最近无预约信息
+	</div>
+
+	<div class="T1" th:if="${t1} ne 0">
+		<p style="position: relative; font-size: 24px; margin-left:20px; margin-top: 10px;">最近预约提醒</p>
+		<br>
+		<ul>
+			<li class="li">
+				<span>设备名称:[[${Equipment.name}]]</span>
+				<span style="position: absolute;left:350px;">日期:[[${Appointment.date}]]</span>
+			</li>
+			<hr />
+			<li class="li">
+				<span>设备编号:[[${Equipment.number}]]</span>
+				<span style="position: absolute;left:350px;">时间:[[${Appointment.time}]]:00 ~~ [[${time2}]]:00</span>
+			</li>
+			<hr />
+			<li class="li">
+				<span>地点:[[${Equipment.location}]]</span>
+				<span style="position: absolute;left:350px;">项目编号:[[${Project.number}]]</span>
+			</li>
+			<hr />
+			<li class="li">
+				<span>设备型号:[[${Equipment.model}]]</span>
+				<span style="position: absolute;left:350px;">项目名称:[[${Project.name}]]</span>
+			</li>
+			<hr />
+
+		</ul>
+	</div>
+
+	<div class="xiangmu">
+		<div style="width:100%;height:40px;background-color: #7ab1ff;">
+			<p style="font-size: 20px;color:black;position: relative;top:5px;left:10px;">近期项目</p>
+		</div>
+		<div style="height:200px;">
+			<table style="width:100%; text-align: center; border-collapse:collapse;">
+				<tr>
+					<th class="td1"><p style="margin-left: 10px;">项目名称</p></th>
+					<th class="td1"><p style="margin-left: 20px;">项目编号</p></th>
+					<!-- <th class="td1"><p style="margin-left: 20px;">项目人员</p></th> -->
+					<th class="td1"><p style="margin-left: 20px;">项目创建者</p></th>
+					<th class="td1"><p style="margin-left: 20px;">项目进度</p></th>
+				</tr>
+
+				<tr th:each="i:${recentProject}">
+					<td class="td3"><p style="margin-left: 10px;">[[${i.name}]]</p></td>
+					<td class="td3"><p style="margin-left: 20px;">[[${i.number}]]</p></td>
+					<td class="td3"><p style="margin-left: 20px;">[[${i.starttime}]]</p></td>
+					<td class="td3"><p style="margin-left: 20px;">[[${i.state}]]</p></td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+	<div id="Tu3">
+
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	var vm = new Vue({
+		el:'.main',
+		data:{
+			list:[{DeviceName:'DFRYUI',DeviceID:'12313123',Place:'201',Model:'DX-11',Time:'2019032205',ProjectID:'asdasd',ProjectName:'123123123'}],
+			list5:[
+				{Name:'Text',ID:'123',People:'qwe'+'asd'+'asd',Manager:'qwe',Complete:'Unfinished'},
+				{Name:'Test',ID:'124',People:'asdasdasd',Manager:'qwr',Complete:'Finished'},
+				{Name:'Test1',ID:'125',People:'asda',Manager:'qwr',Complete:'Finished'}
+			],
+			list2:[
+				{Name:'asdasdasda' , Time:8},
+				{Name:'asdasdasda' , Time:9},
+				{Name:'asdasdasda' , Time:10},
+				{Name:'asdasdasda' , Time:11},
+			],
+			ZT:0,
+			Object:{
+				height:0,
+			},
+			UserDevice:[10,9,9,11,2,5,0],
+			UserLog:[20,30,40,30,30,25,5],
+			DName:'',
+			DID:'',
+			Pla:'',
+			Mod:'',
+			Date:'',
+			Hour:'',
+			Hour1:'',
+			PID:'',
+			PName:'',
+			Hour2:[],
+			Week:[],
+			// Week2:[]
+		},
+		created:function(){
+			this.initData(null);
+		},
+		methods:{
+			initData(){
+				this.ZT = this.list[0].Time + 1;
+				this.Object.height = $(window).height();
+				// console.log(this.Object.height)
+				this.DName = this.list[0].DeviceName;
+				this.DID = this.list[0].DeviceID;
+				this.Pla = this.list[0].Place;
+				this.Mod = this.list[0].Model;
+				var time = this.list[0].Time;
+				this.Date = time.substring(4,8);
+				this.Hour = ''+parseInt(time.substring(time.length -2));
+				this.Hour1 = ''+(parseInt(this.Hour) + 1);
+				// console.log(this.Hour1);
+				this.PID = this.list[0].ProjectID;
+				this.PName = this.list[0].ProjectName;
+				// this.Hour2 = this.list
+				// console.log(this.list2[index].Time)
+				for(var i = 0; i<this.list2.length; i++){
+					this.Hour2[i] = this.list2[i].Time + 1;
+					// console.log(this.Hour2);
+					// console.log(this.Hour2);
+				}
+				for(var i = 0; i<=23; i++){
+					this.Week[i] = i;
+					console.log(this.Week);
+					// this.Week2[i] = this.Week[i] + 1;
+					// console.log(this.Week2);
+				}
+
+
+			},
+			change1(index){
+
+
+				if(index % 2 == 0){
+					return "tr2";
+				}else{
+					return "tr1";
+				}
+
+			},
+			change2(index){
+				if(index % 2 == 0){
+					return "tr2";
+				}else{
+					return "tr1";
+				}
+			},
+			change3(index){
+				if(index % 2 == 0){
+					return "tr2";
+				}else{
+					return "tr2";
+				}
+			},
+		}
+
+	})
+	var myChart = echarts.init(document.getElementById('Tu3'));
+
+	var option = {
+		title:{
+			text:'本周的预约状况',
+			x: 'center',
+		},
+		tooltip:{
+
+		},
+		toolbox: {
+			show : true,
+			feature : {
+				// dataView : {show: true, readOnly: false},
+				// magicType : {show: true, type: ['line', 'bar']},
+				// restore : {show: true},
+				saveAsImage : {show: true}
+			}
+		},
+		grid:[
+			{ y:'20%',y2:'0%'}
+		],
+		xAxis: {
+			position: 'top',
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			// show:false,
+			boundaryGap: false,
+			axisTick: {
+				show: false
+			},
+			axisLine: {
+				onZero: false,
+				show:false,
+			},
+
+			splitLine: {
+				show: true,
+				lineStyle:{
+					color: ['#b0b0b0'],
+					width: 1,
+					type: 'sdotted',
+				},
+			},
+		},
+		yAxis: {
+			type: 'value',
+			// data:[1000]
+			show:false,
+		},
+		series: [{
+			data: [[${timelog}]],
+			type: 'bar',
+			barWidth:60,
+			itemStyle:{
+				normal:{
+					color:'#b0b0b0',
+					barBorderRadius:[10, 10, 10, 10],
+				},
+				emphasis:{
+					color:'red',
+				}
+			}
+		}]
+	};
+	myChart.setOption(option);
+</script>
+</body>
+</html>

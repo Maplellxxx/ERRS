@@ -1,0 +1,41 @@
+h4{
+color:white;
+}
+
+.edit div{
+margin : 0.25in;
+color:white;
+background-color: rgba(0,0,0,0);
+
+}
+
+
+.c1 input{
+border-style: none none solid none;
+border-bottom-style:solid;
+border-width: 1px;
+border-color: black;
+width:350px;
+}
+
+
+.c1 select{
+border-style: none none solid none;
+border-bottom-style:solid;
+border-width: 1px;
+border-color: #a0a0a0;
+width:150px;
+color:white;
+}
+
+option{
+color:black;
+}
+
+#e-infor{
+background-color:#2d61e8;
+color:white;
+border-radius:10px;
+border: none;
+
+}

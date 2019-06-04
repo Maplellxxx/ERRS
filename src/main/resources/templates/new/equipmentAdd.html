@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1" />
+	<title>edit</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	    <style type="text/css">
+
+		.edit{
+		  position: relative;
+		  left:27%;
+          width:600px;
+		  height:600px;
+		  border-color: #d7dfe3;
+          border-radius: 4px;
+         -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+		  margin:30px;
+        }
+        .form-group{
+        color:#b4b0b0;
+        width:600px;
+        padding-left:50px;
+        padding-right:50px;
+        }
+
+        .form-control-line, .form-control-line:focus{
+		    box-shadow: none;
+			border: 0px;
+            outline:none;
+			border-radius:1px;	
+		}
+
+        .form-control-line{
+         border-bottom:1px solid #d9d9d9;
+        }
+        .form-control-line:focus{
+         border-bottom:2px solid #1e88e5;
+        }
+
+ 
+    </style>
+</head>
+<body style="background-color: rgba(0,0,0,0);">
+
+<div class="edit" style="background-color: white;height:500px;">
+                <form class="form-horizontal form-material" th:action="@{/admin/equipment/add}" method="post">
+                                    <div class="form-group" style="position:relative;top:30px;">
+                                        <label class="col-md-12">设备编号</label>
+                                     
+                                        <div class="col-md-12">
+                                            <input type="text" name="number" placeholder="" class="form-control form-control-line" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="position:relative;top:30px;">
+                                        <label for="example-email" class="col-md-12">设备名称</label>
+                                        
+                                        <div class="col-md-12">
+                                            <input type="text" name="name" required="required" placeholder="" class="form-control form-control-line" >
+                                        </div>
+                                    </div>
+                                     <div class="form-group" style="position:relative;top:30px;">
+                                        <label for="example-email" class="col-md-12">设备型号</label>
+                                        <div class="col-md-12">
+                                            <input type="text" name="model" required="required" placeholder="" class="form-control form-control-line" >
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label class="col-md-12">密码</label>
+                                        <div class="col-md-12">
+                                            <input type="password" value="password" class="form-control form-control-line">
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="form-group" style="position:relative;top:20px;">
+                                        <label class="col-md-12" >性别</label>
+                                        <div class="col-md-5">
+                                     <input type="radio" name="sex" value="male" style="width:50px" :checked = 'checked1' >男
+									  <input type="radio" name="sex" value="female" style="width:50px"  :checked = 'checked2'>女
+									 </div>
+                                    </div> -->
+									      
+										<!--  <div class="form-group" style="position:relative;top:20px;">
+                                        <label class="col-sm-12">权限</label>
+                                        <div class="col-sm-12" v-if="Quanxian == '系统管理员'">
+                                                 <input type="text" :placeholder="Quanxian" class="form-control form-control-line">
+                                        </div>
+                                        <div class="col-sm-12" v-else="Quanxian ！= '系统管理员'">
+                                                {{Quanxian}} 
+                                        </div>
+                                    </div> -->
+								
+                                    
+                                    <div class="form-group" style="position:relative;top:30px;">
+                                        <label class="col-sm-12">位置</label>
+                                        <div class="col-sm-12">
+                                            	 <input type="text" required="required" name="location" placeholder="" class="form-control form-control-line">
+                                                
+                                        </div>
+                                    </div>
+									<div class="form-group" style="position:relative;top:30px;">
+                                        <label class="col-md-12">品牌</label>
+                                        <div class="col-md-12" >
+                                            <input type="text" name="brand" required="required" placeholder="" class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                    <br/>
+                                    <div class="form-group" style="position:relative;top:20px;">
+                                         <div class="col-sm-1">
+                                          <button class="finish btn btn-info">添加</button>
+                                          </div>
+                                          <div class="col-sm-10">
+                                           <button class="finish btn btn-success" style="position: relative;left:375px;"> <a href="全部设备.html" style="color:white;">返回</a></button>
+                                          </div>  
+                                      </div>
+                                </form>
+                               
+                                
+    </div>
+
+<script th:inline="javascript">
+    var vm = new Vue({
+        el:'.edit',
+        data:{
+           
+            
+        },
+        created:function(){
+            this.initData(null);
+        },
+        methods:{
+            initData(){
+                this.ID = this.list[0].ID;
+                this.Name = this.list[0].Name;
+                this.Kind = this.list[0].Kind;
+                this.Where = this.list[0].Where;
+                this.GS = this.list[0].GS;
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap 实例 - 弹出框（Popover）插件</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container" style="padding: 100px 50px 10px;" >
+    <button type="button" class="btn btn-warning" title="Popover title"
+            data-container="body" data-toggle="popover" data-placement="right"
+            data-content="右侧的 Popover 中的一些内容">
+        右侧的 Popover
+    </button>
+
+    <a href="#" class="bind_hover_card" data-toggle="popover" data-placement="bottom" data-trigger="hover">1231</a>
+
+</div>
+<script>
+    $(function () {
+        $("[data-toggle='popover']").popover({
+            html : true,
+            title: title(),
+            // delay:{show:500, hide:1000},
+            content: function() {
+                return content();
+            }
+        });
+    });
+
+    //模拟动态加载标题(真实情况可能会跟后台进行ajax交互)
+    function title() {
+        return '预约详情';
+    }
+
+    //模拟动态加载内容(真实情况可能会跟后台进行ajax交互)
+    function content() {
+        var data = $("<form><ul><li><span aria-hidden='true' class='icon_globe'></span>&nbsp;<font>机器编号:</font>7389223</li>" +
+            "<li><span aria-hidden='true' class='icon_piechart'></span>&nbsp;<font>预约时间:</font>265</li>" +
+            "<li><span aria-hidden='true' class='icon_search_alt'></span>&nbsp;<font>预约用户:</font>645</li>" +
+            "<li><span aria-hidden='true' class='icon_pens_alt'></span>&nbsp;<font>项目:</font>台湾</li>" +
+            "<input id='btn' type='button' value='申请紧急插入' onclick='test()'/></form>");
+        return data;
+    }
+    //模拟悬浮框里面的按钮点击操作
+    function test() {
+        alert('关注成功');
+    }
+
+</script>
+
+</body>
+</html>

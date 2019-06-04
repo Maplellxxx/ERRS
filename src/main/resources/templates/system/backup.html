@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body>
+<!--<a th:href="@{/system/databasebackup}" class="button icon log">-->
+    <!--<button>数据库备份</button>-->
+<!--</a>-->
+<center>
+    <div style="margin-top:100px;width: 700px;height: 300px;border-radius:30px;border-color: #dddddd;border-width: 10px;">
+        <div style="">
+            <div style="font-size: 25px;padding-top:30px;">上次备份时间：[[${time}]] <br> 备份类型：[[${info}]]</div>
+            <br>
+            <div style="color:#D3D3D3;">注：系统每24小时自动备份一次</div>
+        </div>
+        <button class="btn btn-info" style="margin-top: 30px;width: 150px;" onclick="databasebackup()">备份</button>
+    </div>
+</center>
+
+
+</body>
+<script>
+    function databasebackup() {
+        $.ajax({
+            url: "http://localhost:8080/system/databasebackup", type: "post", datatype: "json", success: function (result) {
+                if (result == "success") {
+                    alert('数据库备份成功');
+                } else {
+                    alert('数据库备份失败');
+                }
+            }
+        })
+    }
+</script>
+</html>

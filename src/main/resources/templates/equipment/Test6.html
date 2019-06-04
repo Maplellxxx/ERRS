@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <table>
+        <tr>
+            <td>账号</td>
+            <td>名字</td>
+            <td>状态</td>
+            <td>操作</td>
+        </tr>
+        <tr v-for='(item,index) in list'>
+            <td><p>{{item.id}}</p></td>
+            <td><p>{{item.name}}</p></td>
+            <td><p>{{item.Boom}}</p></td>
+            <td>
+
+                <input type="button" v-model="btn1"  v-if="item.Boom ==='Stop'" @click="click1(index)" >
+                <input type="button" v-model="btn2"  v-else-if="item.Boom ==='Run'" @click="click2(index)">
+                <div v-else><p>无法使用</p></div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            btn1:'Run',
+            btn2:'Stop',
+            list:[
+                {id : 1, name:'sadasd', Boom:'Stop'},
+                {id : 2, name:'sadasd', Boom:'Run'},
+                {id : 3, name:'sadasd', Boom:'Run'},
+                {id : 4, name:'sadasd', Boom:'Stop'},
+                {id : 5, name:'sadasd', Boom:'asdasd'}
+            ]
+        },
+        methods:{
+            click1(index){
+                window.location.href="Test"+this.list[index].id+".html"
+            },
+            click2(index){
+                window.location.href="Test"+this.list[index].id+".html"
+            }
+        }
+
+
+    })
+</script>
+</body>
+</html>
+
+

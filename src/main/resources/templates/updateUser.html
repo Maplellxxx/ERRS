@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/main.html}">主页</a>
+<a th:href="@{/userinfo/}+${session.loginUser}">个人中心</a>
+<a th:href="@{/cancel}">注销</a>
+<h1>User Update:</h1>
+<form th:action="@{/updateUser}" method="post">
+    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+    id: <input th:value="${id}" disabled="disabled">
+    <input type="hidden" name="id" th:value="${id}">
+    <br>
+    用户名: <input th:value="${username}" disabled="disabled">
+                <input type="hidden" name="username" th:value="${username}" required="required">
+
+    <!--密码:--> <input name="password" type="hidden" th:value="${password}" required="required">
+    <br>
+    权限: <input th:value="${authority}" disabled="disabled">
+    <input type="hidden" name="authority" th:value="${authority}">
+    <br>
+    姓名: <input type="text" name="name" th:value="${name}" required="required">
+    <br>
+    性别:
+    <!--<input type="text" name="gender" th:value="${gender}" required="required">-->
+    <select name="gender" th:if="${gender} eq '男'">
+        <option value="男" selected="selected">男</option>
+        <option value="女">女</option>
+    </select>
+    <select name="gender" th:if="${gender} eq '女'">
+        <option value="男">男</option>
+        <option value="女" selected="selected">女</option>
+    </select>
+    <br>
+    项目组: <input type="text" name="projectteam" th:value="${projectteam}" required="required">
+    <br>
+    部门: <input type="text" name="department" th:value="${department}" required="required">
+    <br>
+    电子邮箱：<input type="text" name="email" th:value="${email}" required="required">
+    <input type="submit" value="修改">
+   </form>
+</body>
+</html>

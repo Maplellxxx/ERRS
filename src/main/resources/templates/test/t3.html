@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="https://unpkg.com/vue/dist/vue.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+</head>
+<body>
+
+
+<div id="app">
+    <table>
+        <tr v-for="item in list">
+            <td>{{item.id}}</td>
+        </tr>
+    </table>
+
+    <table>
+        <tr v-for="item in list2">
+            <td>{{item.id}}</td>
+        </tr>
+    </table>
+</div>
+
+
+
+<script th:inline="javascript">
+
+
+    new Vue({
+        el: '#app',
+        data: {
+            list: [[${recentProject}]],
+            list2:[[${info}]],
+            msg:1
+        },
+        methods:{
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/project/add}" method="post">
+    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+    项目代码：<input type="text" name="number" required="required"><br>
+    项目名称：<input type="text" name="name" required="required"><br>
+    <input type="submit" value="添加">
+</form>
+</body>
+</html>

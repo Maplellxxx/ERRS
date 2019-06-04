@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table border="1" style="text-align: center">
+        <tr>
+            <td>id</td>
+            <td>用户权限</td>
+            <td>用户id</td>
+            <td>操作</td>
+            <td>操作对象</td>
+            <td>对象类型</td>
+            <td>时间</td>
+        </tr>
+        <tr th:each="i:${info}">
+            <td><a th:href="@{/admin/log/}+${i.id}">[[${i.id}]]</a></td>
+            <td>[[${i.authority}]]</td>
+            <td>[[${i.userID}]]</td>
+            <td>[[${i.operation}]]</td>
+            <td>[[${i.object}]]</td>
+            <td>[[${i.type}]]</td>
+            <td>[[${i.time}]]</td>
+        </tr>
+
+    </table>
+</body>
+</html>

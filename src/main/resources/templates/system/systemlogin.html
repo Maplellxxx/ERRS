@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<br>
+<br>
+<br>
+<div style="width: 300px;margin-left:600px;">
+    <center><h2>系统管理员登录</h2></center>
+<form th:action="@{/system/login}" method="post">
+    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+    <input type="text" name="username" required="required" class="form-control" placeholder="用户名"><br>
+    <input type="password" name="password1" required="required" class="form-control" placeholder="一级密码"><br>
+    <input type="password" name="password2" required="required" class="form-control" placeholder="二级密码"><br>
+    <center><input type="submit" value="登陆" class="btn btn-primary">
+        <a th:href="@{/}" style="margin-left: 50px"><button class="btn btn-default">普通登陆</button></a></center>
+</form>
+</div>
+</body>
+</html>

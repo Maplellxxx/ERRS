@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/system/index}">系统管理员主页</a>
+<a th:href="@{/cancel}">注销</a>
+<br>
+<h1>User Update:</h1>
+<form th:action="@{/system/updateUser}" method="post">
+    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+    id: <input th:value="${user.id}" disabled="disabled">
+    <input type="hidden" name="id" th:value="${user.id}">
+    <br>
+    用户名: <input name="username" th:value="${user.username}" required="required">
+    <br>
+    密码: <input name="password" th:value="${user.password}" required="required">
+    <br>
+    权限:
+    <!--<input type="text" name="authority" th:value="${user.authority}">-->
+    <select name="authority" th:if="${user.authority} eq '管理员'">
+        <option value ="管理员" selected="selected">管理员</option>
+        <option value ="普通用户">普通用户</option>
+    </select>
+    <select name="authority" th:if="${user.authority} eq '普通用户'">
+        <option value ="普通用户" selected="selected">普通用户</option>
+        <option value ="管理员">管理员</option>
+    </select>
+    <br>
+    姓名: <input type="text" name="name" th:value="${user.name}" required="required">
+    <br>
+    性别: <input type="text" name="gender" th:value="${user.gender}" required="required">
+    <br>
+    项目组: <input type="text" name="projectteam" th:value="${user.projectteam}" required="required">
+    <br>
+    部门: <input type="text" name="department" th:value="${user.department}" required="required">
+    <br>
+    <input type="submit" value="修改">
+   </form>
+</body>
+</html>

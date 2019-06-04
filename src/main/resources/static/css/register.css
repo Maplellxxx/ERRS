@@ -1,0 +1,90 @@
+body{
+    background-image: url(../image/register.jpg);
+    background-repeat: no-repeat;
+    background-position-x: center;
+
+}
+	.register{
+	width: 60%;
+	height:450px;
+	background-color:white;
+	margin-left:20%;
+	margin-top:20px;
+	padding-top:10px;
+	outline:#d9dfe6 solid 1px;
+	border-top:2px solid #2075f6;
+	text-align:center;
+	}
+
+        table{
+            width: 400px;
+            text-align: center;
+			//border:1px solid black;
+			margin-left:23%;
+			margin-top:50px;
+			
+		
+        }
+        .th{
+            height: 40px;
+            width: 30%;
+            text-align: right;
+			font-family: 微软雅黑;
+			color:#8c98ab;
+        }
+        td{
+            height: 40px;
+            width: 50%;
+            text-align: left;
+
+        }
+ input,select,option{
+ border:0;
+ border-bottom:1px solid #dddddd;
+ outline:none;
+ height:30px;
+ width:250px;
+
+}
+ input::-webkit-input-placeholder {
+       color: #dddddd;    
+       font-size: 15px;
+	
+   }
+   .option{
+        color: #dddddd;    
+        font-size: 12px;
+	   	font-weight:bold;
+   }
+	.button {
+         background-color: #2075f6; 
+         border: none;
+       color: white;
+	width:260px;
+    padding: 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    cursor: pointer;
+	border-radius: 2px;
+}
+.btn-register:hover{
+background-color: #428cfb;
+
+}
+a:link,a:visited
+{
+
+color:#5c99f4;
+text-decoration:none;
+}
+
+a:hover,a:active
+{
+color:#2075f6;
+
+}

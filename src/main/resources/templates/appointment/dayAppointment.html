@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background: #f0f0f0;
+        }
+        ul{
+            list-style:none ;
+        }
+        ul li{
+
+            height: 85px;
+            text-align: center;
+            font-size: 12px;
+            margin-top: 5px;
+            /*background: #EBF8FE;*/
+            /*background: rgba(152,245,255,0.2);*/
+            border:0.5px solid #a3a3a3;
+            border-radius:5px;
+            margin-left: 10px;
+        }
+        .t{
+            /*background: #000;*/
+            float: left;
+            /*margin-left: 15px;*/
+            width: 22%;
+        }
+
+        .area{
+            text-align: center;
+            /*background: blue;*/
+            width: 95%;
+            margin-left: 10px;
+            font-size: 20px;
+        }
+
+        .day{
+            /*background: green;*/
+            width: 60%;
+            height: 630px;
+            float: left;
+            border:1px solid #bfd1eb;
+            background:white;
+            border-radius: 10px;
+            /*box-shadow:4px 4px 10px #8c8c8c;*/
+        }
+
+        .title{
+            border-bottom: 1px solid #8c8c8c;
+            /*background: #4EB5F7;*/
+            background-color: #4EB5F7;
+            color: white;
+        }
+
+
+        .info{
+            text-align: left;
+            background: #CBE6F5;
+            height: 81%;
+            border-bottom-right-radius:5px;
+            border-bottom-left-radius:5px;
+            font-size: 11px;
+            /*color: white;*/
+        }
+
+
+
+
+
+        .calendar{
+            /*background: red;*/
+            width: 22%;
+            float: left;
+            margin-left: 15px;
+            margin-top: 30px;
+        }
+
+        .date{
+            width: 22%;
+            height: 200px;
+            float: left;
+            margin-left: 15px;
+            background: #f3f8ff;
+            margin-top: 20px;
+            border:1px solid #bfd1eb;
+        }
+
+        #calendar{
+            width:100%;
+            margin: 0 auto;
+            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.1), 0 1px 5px 0
+            rgba(0,0,0,0.12);
+        }
+        .month {
+            width: 100%;
+            height:50px;
+            background: rgba(192,192,192,0.7);
+            text-align: center;
+        }
+
+        /*.month ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        }*/
+
+        .year-month {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .year-month:hover {
+            background: rgba(150, 2, 12, 0.1);
+        }
+
+        .choose-year {
+            padding-left: 20px;
+            font-size: 1.5rem;
+        }
+
+        .choose-month {
+            font-size: 1.25rem;
+            padding-right: 20px;
+        }
+
+        .arrowleft {
+            width:50px;
+            height:100%;
+            border:none;
+            /*position: relative;
+            left:0px;*/
+            background-color: rgba(192,192,192,0);
+        }
+
+        .arrowleft:hover {
+            background:white;
+        }
+
+        .arrowright {
+            width:50px;
+            height:100%;
+            border:none;
+            /* position: relative;
+             right: 0;*/
+            background-color: rgba(192,192,192,0);
+        }
+
+        .arrowright:hover {
+            background:white;
+        }
+
+
+        .weekdays {
+            width:100%;
+            margin: 0;
+            padding: 10px 0;
+            background-color: #00B8EC;
+            font-size: 10px;
+            /*display: flex;*/
+            flex-wrap: wrap;
+            color: #FFFFFF;
+            /*justify-content: space-around;*/
+        }
+
+        .weekdays td {
+            display: inline-block;
+            width: 13.2%;
+            text-align: center;
+            /*background-color: black;*/
+        }
+
+        .days {
+            padding: 0;
+            background: #FFFFFF;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .days td {
+            list-style-type: none;
+            display: inline-block;
+            width: 14.2%;
+            text-align: center;
+            padding-bottom: 15px;
+            padding-top: 15px;
+            font-size: 1rem;
+            color: #000;
+        }
+
+        .days td .active {
+            padding: 6px 10px;
+            border-radius: 50%;
+            background: #00B8EC;
+            color: #fff;
+        }
+
+        .days td .other-month {
+            padding: 5px;
+            color: gainsboro;
+        }
+
+        .days td:hover {
+            background: #e1e1e1;
+        }
+        .Today{
+            border:none;
+            width:30px;
+            height:30px;
+            border-radius: 50%;
+            background-color: #00b8ec;
+            position: relative;
+            left:20px;
+        }
+
+    </style>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+</head>
+<body>
+
+<div class="day">
+
+    <div style="text-align: center;font-size: 20px;font-weight: lighter">
+        <input type="button" value="<" class="arrowleft" style="font-size: 25px;"
+            onclick="javascript:window.location.href='/appointment/day/'+date+'/before'"/>
+        [[${datetime}]]
+        <input type="button" value=">" class="arrowright" style="font-size: 25px;"
+                onclick="javascript:window.location.href='/appointment/day/'+date+'/after'"/>
+    </div>
+    <ul>
+
+        <div class="t" style="margin-left: 20px;">
+            <div class="area">凌 晨</div>
+            <li class="" id=""><div class="title">0:00-1:00</div>
+                <div class="info" th:if="${alist[0].time} ne null">
+                    <div>
+                        设备编号：[[${elist[0].number}]]<br>
+                        设备名称：[[${elist[0].name}]]<br>
+                        项目名称：[[${plist[0].name}]]<br>
+                        设备地点：[[${elist[0].location}]]<br>
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">1:00-2:00</div>
+                <div class="info" th:if="${alist[1].time} ne null">
+                    <div>
+                        设备编号：[[${elist[1].number}]]<br>
+                        设备名称：[[${elist[1].name}]]<br>
+                        项目名称：[[${plist[1].name}]]<br>
+                        设备地点：[[${elist[1].location}]]<br>
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">2:00-3:00</div>
+                <div class="info" th:if="${alist[2].time} ne null">
+                    <div>
+                        设备编号：[[${elist[2].number}]]<br>
+                        设备名称：[[${elist[2].name}]]<br>
+                        项目名称：[[${plist[2].name}]]<br>
+                        设备地点：[[${elist[2].location}]]<br>
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">3:00-4:00</div>
+                <div class="info" th:if="${alist[3].time} ne null">
+                    <div>
+                        设备编号：[[${elist[3].number}]]<br>
+                        设备名称：[[${elist[3].name}]]<br>
+                        项目名称：[[${plist[3].name}]]<br>
+                        设备地点：[[${elist[3].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">4:00-5:00</div>
+                <div class="info" th:if="${alist[4].time} ne null">
+                    <div>
+                        设备编号：[[${elist[4].number}]]
+                        <br>
+                        设备名称：[[${elist[4].name}]]<br>
+                        项目名称：[[${plist[4].name}]]
+                        <br>
+                        设备地点：[[${elist[4].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">5:00-6:00</div>
+                <div class="info" th:if="${alist[5].time} ne null">
+                    <div>
+                        设备编号：[[${elist[5].number}]]<br>
+                        设备名称：[[${elist[5].name}]]<br>
+                        项目名称：[[${plist[5].name}]]
+                        <br>
+                        设备地点：[[${elist[5].location}]]
+                    </div>
+                </div>
+            </li>
+        </div>
+
+        <div class="t">
+            <div class="area">上 午</div>
+            <li class="" id=""><div class="title">6:00-7:00</div>
+                <div class="info" th:if="${alist[6].time} ne null">
+                    <div>
+                        设备编号：[[${elist[6].number}]]
+                        <br>
+                        设备名称：[[${elist[6].name}]]<br>
+                        项目名称：[[${plist[6].name}]]
+                        <br>
+                        设备地点：[[${elist[6].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">7:00-8:00</div>
+                <div class="info" th:if="${alist[7].time} ne null">
+                    <div>
+                        设备编号：[[${elist[7].number}]]
+                        <br>
+                        设备名称：[[${elist[7].name}]]<br>
+                        项目名称：[[${plist[7].name}]]
+                        <br>
+                        设备地点：[[${elist[7].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">8:00-9:00</div>
+                <div class="info" th:if="${alist[8].time} ne null">
+                    <div>
+                        设备编号：[[${elist[8].number}]]
+                        <br>
+                        设备名称：[[${elist[8].name}]]<br>
+                        项目名称：[[${plist[8].name}]]
+                        <br>
+                        设备地点：[[${elist[8].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">9:00-10:00</div>
+                <div class="info" th:if="${alist[9].time} ne null">
+                    <div>
+                        设备编号：[[${elist[9].number}]]
+                        <br>
+                        设备名称：[[${elist[9].name}]]<br>
+                        项目名称：[[${plist[9].name}]]
+                        <br>
+                        设备地点：[[${elist[9].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">10:00-11:00</div>
+                <div class="info" th:if="${alist[10].time} ne null">
+                    <div>
+                        设备编号：[[${elist[10].number}]]
+                        <br>
+                        设备名称：[[${elist[10].name}]]<br>
+                        项目名称：[[${plist[10].name}]]
+                        <br>
+                        设备地点：[[${elist[10].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">11:00-12:00</div>
+                <div class="info" th:if="${alist[11].time} ne null">
+                    <div>
+                        设备编号：[[${elist[11].number}]]
+                        <br>
+                        设备名称：[[${elist[11].name}]]<br>
+                        项目名称：[[${plist[11].name}]]
+                        <br>
+                        设备地点：[[${elist[11].location}]]
+                    </div>
+                </div>
+            </li>
+        </div>
+
+        <div class="t">
+            <div class="area">下 午</div>
+            <li class="" id=""><div class="title">12:00-13:00</div>
+                <div class="info" th:if="${alist[12].time} ne null">
+                    <div>
+                        设备编号：[[${elist[12].number}]]
+                        <br>
+                        设备名称：[[${elist[12].name}]]<br>
+                        项目名称：[[${plist[12].name}]]
+                        <br>
+                        设备地点：[[${elist[12].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">13:00-14:00</div>
+                <div class="info" th:if="${alist[13].time} ne null">
+                    <div>
+                        设备编号：[[${elist[13].number}]]
+                        <br>
+                        设备名称：[[${elist[13].name}]]<br>
+                        项目名称：[[${plist[13].name}]]
+                        <br>
+                        设备地点：[[${elist[13].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">14:00-15:00</div>
+                <div class="info" th:if="${alist[14].time} ne null">
+                    <div>
+                        设备编号：[[${elist[14].number}]]
+                        <br>
+                        设备名称：[[${elist[14].name}]]<br>
+                        项目名称：[[${plist[14].name}]]
+                        <br>
+                        设备地点：[[${elist[14].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title" >15:00-16:00</div>
+                <div class="info" th:if="${alist[15].time} ne null">
+                    <div>
+                        设备编号：[[${elist[15].number}]]<br>
+                        设备名称：[[${elist[15].name}]]<br>
+                        项目名称：[[${plist[15].name}]]
+                        <br>
+
+                        设备地点：[[${elist[15].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title" >16:00-17:00</div>
+                <div class="info" th:if="${alist[16].time} ne null">
+                    <div>
+                        设备编号：[[${elist[16].number}]]
+                        <br>
+                        设备名称：[[${elist[16].name}]]<br>
+                        项目名称：[[${plist[16].name}]]
+                        <br>
+                        设备地点：[[${elist[16].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title" >17:00-18:00</div>
+                <div class="info" th:if="${alist[17].time} ne null">
+                    <div>
+                        设备编号：[[${elist[17].number}]]
+                        <br>
+                        设备名称：[[${elist[17].name}]]<br>
+                        项目名称：[[${plist[17].name}]]
+                        <br>
+                        设备地点：[[${elist[17].location}]]
+                    </div>
+                </div>
+            </li>
+        </div>
+
+        <div class="t">
+            <div class="area">晚 上</div>
+            <li class="" id=""><div class="title" >18:00-19:00</div>
+                <div class="info" th:if="${alist[18].time} ne null">
+                    <div>
+                        设备编号：[[${elist[18].number}]]
+                        <br>
+                        设备名称：[[${elist[18].name}]]<br>
+                        项目名称：[[${plist[18].name}]]
+                        <br>
+                        设备地点：[[${elist[18].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">19:00-20:00</div>
+                <div class="info" th:if="${alist[19].time} ne null">
+                    <div>
+                        设备编号：[[${elist[19].number}]]
+                        <br>
+                        设备名称：[[${elist[19].name}]]<br>
+                        项目名称：[[${plist[19].name}]]
+                        <br>
+                        设备地点：[[${elist[19].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">20:00-21:00</div>
+                <div class="info" th:if="${alist[20].time} ne null">
+                    <div>
+                        设备编号：[[${elist[20].number}]]
+                        <br>
+                        设备名称：[[${elist[20].name}]]<br>
+                        项目名称：[[${plist[20].name}]]
+                        <br>
+                        设备地点：[[${elist[20].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">21:00-22:00</div>
+                <div class="info" th:if="${alist[21].time} ne null">
+                    <div>
+                        设备编号：[[${elist[21].number}]]
+                        <br>
+                        设备名称：[[${elist[21].name}]]<br>
+                        项目名称：[[${plist[21].name}]]
+                        <br>
+
+                        设备地点：[[${elist[21].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">22:00-23:00</div>
+                <div class="info" th:if="${alist[22].time} ne null">
+                    <div>
+                        设备编号：[[${elist[22].number}]]
+                        <br>
+                        设备名称：[[${elist[22].name}]]<br>
+                        项目名称：[[${plist[22].name}]]
+                        <br>
+                        设备地点：[[${elist[22].location}]]
+                    </div>
+                </div>
+            </li>
+            <li class="" id=""><div class="title">23:00-24:00</div>
+                <div class="info" th:if="${alist[23].time} ne null">
+                    <div>
+                        设备编号：[[${elist[23].number}]]
+                        <br>
+                        设备名称：[[${elist[23].name}]]<br>
+                        项目名称：[[${plist[23].name}]]
+                        <br>
+                        设备地点：[[${elist[23].location}]]
+                    </div>
+                </div>
+            </li>
+        </div>
+    </ul>
+</div>
+
+<div class="date" style="text-align: center">
+    <div style="font-size: 50px;margin-top: 10%;color: red;">[[${day}]]</div>
+    <div style="font-size: 30px;margin-top: 2%;color: #7d7d7d">[[${month}]]</div>
+    <div style="font-size: 20px;margin-top: 2%;color: #c5c5c5;">[[${weekday}]]</div>
+</div>
+
+<div class="calendar">
+    <div id="calendar">
+        <div class="month">
+            <input type="button" class="arrowleft" @click="pickPre(currentYear,currentMonth)" value="❮">
+            <span @click="pickYear(currentYear,currentMonth)" class="YM">
+   		<span class="choose-year">{{currentYear}}年</span>
+   		<span class="choose-month" v-if="currentMonth == 1">1月</span>
+   		<span class="choose-month" v-if="currentMonth == 2">2月</span>
+   		<span class="choose-month" v-if="currentMonth == 3">3月</span>
+   		<span class="choose-month" v-if="currentMonth == 4">4月</span>
+   		<span class="choose-month" v-if="currentMonth == 5">5月</span>
+   		<span class="choose-month" v-if="currentMonth == 6">6月</span>
+   		<span class="choose-month" v-if="currentMonth == 7">7月</span>
+   		<span class="choose-month" v-if="currentMonth == 8">8月</span>
+   		<span class="choose-month" v-if="currentMonth == 9">9月</span>
+   		<span class="choose-month" v-if="currentMonth == 10">10月</span>
+   		<span class="choose-month" v-if="currentMonth == 11">11月</span>
+   		<span class="choose-month" v-if="currentMonth == 12">12月</span>
+	</span>
+            <input type="button" class="arrowright" @click="pickNext(currentYear,currentMonth)" value="❯">
+            <input type="button" class="Today" @click="pickToday(currentYear, currentMonth)" value="今" v-if="currentMonth != Month || currentYear != Year">
+        </div>
+        <table class="weekdays">
+            <td>一</td>
+            <td>二</td>
+            <td>三</td>
+            <td>四</td>
+            <td>五</td>
+            <td style="color:red">六</td>
+            <td style="color:red">日</td>
+        </table>
+        <table class="days">
+            <td @click="pick(day)" v-for="day in days">
+                <!--今天-->
+                <span v-if="day.getMonth()+1 != currentMonth" class="other-month">{{day.getDate()}}</span>
+                <span v-else>
+   <!--今天-->
+                    <span v-if="day.getFullYear() + '0' + (day.getMonth() + 1) + day.getDate() == data1 " class="active">{{day.getDate()}}</span>
+                    <span v-else>{{day.getDate()}}</span>
+   </span>
+            </td>
+        </table>
+    </div>
+</div>
+</body>
+
+
+<script type="text/javascript">
+    date=[[${date}]];
+    new Vue({
+        el: '#calendar',
+        data: {
+            currentDay: 1,
+            currentMonth: 1,
+            currentYear: 1970,
+            currentWeek: 1,
+            days: [],
+            Month:'',
+            Year:'',
+            id:0,
+            data1:[[${date}]]
+        },
+        created: function() {
+            this.initData(null);
+        },
+        methods: {
+            initData: function(cur) {
+                var date;
+                if (cur) {
+                    date = new Date(cur);
+                } else {
+                    date = new Date();
+                }
+                var da = new Date();
+                this.Month = da.getMonth() + 1;
+                this.Year = da.getFullYear();
+                console.log(this.Month);
+                this.currentDay = date.getDate();
+                this.currentYear = date.getFullYear();
+                this.currentMonth = date.getMonth() + 1;
+                console.log("currentMonth = " + this.currentMonth);
+                this.currentWeek = date.getDay(); // 1...6,0
+                // console.log("this.currentWeek="+this.currentWeek);
+                var a = new Date(this.formatDate(this.currentYear,this.currentMonth,1)).getDay();
+                if (this.currentWeek == 0) {
+                    this.currentWeek = 7;
+                }
+                var str = this.formatDate(this.currentYear , this.currentMonth, this.currentDay );
+                // console.log("today:" + str + "," + this.currentWeek);
+                this.days.length = 0;
+                // 今天是周日，放在第一行第7个位置，前面6个
+                for (var i = a - 1; i >= 0; i--) {
+                    // console.log("i="+i);
+                    var d = new Date(this.formatDate(this.currentYear,this.currentMonth,1));
+                    d.setDate(d.getDate()-i);
+                    // console.log("y:" + d.getDate());
+                    this.days.push(d);
+                }
+                for (var i = 1; i <= 35 - a; i++) {
+                    var d = new Date(this.formatDate(this.currentYear,this.currentMonth,1));
+                    d.setDate(d.getDate()+i);
+                    this.days.push(d);
+                }
+            },
+            pick: function(date) {
+                var Mdate = '';
+                if(date.getDate() < 10){
+                    Mdate = '0' + date.getDate();
+                    // alert( '/appointment/'+this.id+'/'+date.getFullYear() +'0'+ (date.getMonth() + 1) +''+ date.getDate()+'.html');
+                }
+                else{
+                    Mdate = date.getDate();
+                }
+                window.location.href="/appointment/day/"+date.getFullYear() +'0'+ (date.getMonth() + 1) +''+ Mdate
+            },
+            pickPre: function(year, month) {
+                // setDate(0); 上月最后一天
+                // setDate(-1); 上月倒数第二天
+                // setDate(dx) 参数dx为 上月最后一天的前后dx天
+                var d = new Date(this.formatDate(year , month , 1));
+                d.setDate(0);
+                this.initData(this.formatDate(d.getFullYear(),d.getMonth() + 1,1));
+            },
+            pickNext: function(year, month) {
+                var d = new Date(this.formatDate(year , month , 1));
+                d.setDate(35);
+                this.initData(this.formatDate(d.getFullYear(),d.getMonth() + 1,1));
+            },
+            pickYear: function(year, month) {
+                alert(year + "," + month);
+            },
+
+            pickToday:function(year,month){
+                var da = new Date();
+                this.initData(this.formatDate(da.getFullYear() , da.getMonth()+1 , 1));
+            },
+            // 返回 类似 2016-01-02 格式的字符串
+            formatDate: function(year,month,day){
+                var y = year;
+                var m = month;
+                if(m<10) m = "0" + m;
+                var d = day;
+                if(d<10) d = "0" + d;
+                return y+"-"+m+"-"+d
+            }
+        }
+    })
+
+
+</script>
+</html>

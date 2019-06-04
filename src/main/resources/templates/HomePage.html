@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="fontawesome-free-5.7.1-web/css/all.css" rel="stylesheet">
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="Test/vue.min.js"></script>
+	<script src="js/vector.js"></script>
+	<script src="js/echarts.js"></script>
+	<style>
+		*{
+			padding:0px;
+			margin: 0px;
+		}
+		#header{
+			background-color: #0191c7;
+			/*background-color: #3E50B5;*/
+			width:100%;
+			/*height:50px;*/
+			box-shadow: 0px 1px 1px #cccccc;
+			padding: 0 15px;
+			position: fixed;
+			left: 0px;
+			right:0px;
+			height: 60px;
+			z-index: 999;
+		}
+		.menu1{
+			/*width:50px;*/
+			/*height:100%;*/
+			/*text-align: center;*/
+			color:white;
+			/*color:white;*/
+			padding-right:15px;
+			/*cursor: pointer;*/
+			float:left;
+			/*font-size:20px;*/
+		}
+		.page{
+			color:white;
+			/*color:white;*/
+			font-size: 23px;
+			float:left;
+			text-transform: uppercase;
+		}
+		.func{
+			
+			float:left;
+			/*background-color: black;*/
+			margin-left: 65px;
+			margin-top: 20px;
+			z-index: 999;
+		}
+		.A1{
+			color:white;
+			/*color:white*/
+			font-size: 16px;
+			border-radius: 4px;
+			border:1px solid white!important;
+			padding:2px 6px;
+			margin-right:10px;
+			z-index: 999; 
+		}
+		.A1:hover{
+			background-color: white;
+			/*background-color: #3E50B5;*/
+			color:#0191c7;
+		}
+		.A2{
+			position: absolute;
+			right:355px;
+			top:21px;
+			color:#0191c7;
+			/*color:#3E50B5;*/
+			z-index: 999;
+		}
+		/*.Person{
+			width:150px;
+			height:100%;
+			float:right;
+			margin-right: 20px;
+
+		}*/
+		/*.btn2{
+			width:100%;
+			height:100%;
+			border:none;
+			font-size: 24px;
+			color:#898d81;
+			cursor: pointer;
+			background-color:white;
+		}
+		.btn2:hover{
+			background-color: #e6e6e6;
+		}*/
+		.btn3{
+			/*width:100%;*/
+			width:100px;
+			height:30px;
+			background-color: rgba(0,0,0,0);
+			border:none;
+			/*border:1px solid white;*/
+			/*margin-top: 5px;*/
+			font-size: 24px;
+			/*color:#3E50B5;*/
+			color:white;
+			/*box-shadow:1px 1px 1px #ffffff,-1px -1px 1px #ffffff,-1px 1px 1px #ffffff, 1px -1px 1px #ffffff;*/
+			border-radius: 2px;
+			cursor: pointer;
+			position: absolute;
+			right:50px;
+			top:15px;
+			z-index:999;  
+		}
+		.btn3:hover{
+			background-color: white;
+			/*background-color: #3E50B5;*/
+			color:#0191c7;
+			/*box-shadow:0px 0px 0px #ffffff,-0px -0px 0px #ffffff,-0px 0px 0px #ffffff, 0px -0px 0px #ffffff;  */
+		}
+		.panel1{
+			width:200px;
+			height:75px;
+			background-color: black;
+			float:right;
+			position: relative;
+			top:45px;
+			right:30px;
+			/*box-shadow:1px 1px 1px #7d7d7d,-1px -1px 1px #7d7d7d,-1px 1px 1px #7d7d7d, 1px -1px 1px #7d7d7d;*/
+			display: none;
+			z-index: 999;
+			border:1px solid #009efb;
+		}
+		.btn4{
+			width:100px;
+			height:75px;
+			background-color: white;
+			border:none;
+			font-size: 24px;
+			cursor: pointer;
+			color:#009efb;
+			/*color:#3E50B5;*/
+		}
+		.btn4:hover{
+			background-color:#009efb;
+			/*background-color:#3E50B5;*/
+			color:white;
+		}
+		.btn5{
+			width:200px;
+			height:75px;
+			background-color: #797979;
+			/*background-color: #3e50b5;*/
+			border:none;
+			font-size: 24px;
+			cursor: pointer;
+			color:white;
+		}
+		.btn5:hover{
+			background-color:white;
+			color:#797979;
+			/*color:#3e50b5;*/
+		}
+		.select{
+			/*width:340px;
+			height:24px;*/
+			/*background-color: lightblue;*/
+			/*float:right;*/
+			margin-top: 7px;
+			float:right;
+			z-index:999;
+			/*margin-right: 100px;*/
+		}
+		.Sel{
+			width:150px;
+			height:24px;
+			/*padding-top:11px;*/
+			border-radius: 5px;
+			/*border:1px solid #ffffff;*/
+			border:1px solid #ffffff;
+			/*box-shadow: 1px 1px 1px #ffffff,-1px -1px 1px #ffffff,-1px 1px 1px #ffffff, 1px -1px 1px #ffffff;*/
+			/*padding-left: 40px;*/
+			/*margin-right: 30px;*/
+			/*margin-top:8px;*/
+			font-size: 14px;
+			padding-left: 25px;
+			position: absolute;
+			top:18px;
+			right:200px;
+			z-index:999;
+			/*text-align: center; */
+		}
+		
+		.panel4{
+			position: absolute;
+			top:50px;
+			display: none;
+			z-index: 999;
+			background-color: rgba(0,0,0,0);
+		}
+		.btn6{
+			float:left;
+			width:30px;
+			height:100%;
+			border:none; 
+			border-radius: 5px;
+			position:relative;
+			top:-24px;
+			background-color: white;
+			color:#7fbbef;
+			cursor: pointer;
+		}
+		.btn6:hover{
+			color:lightblue;
+		}
+		.select1{
+			width:120px;
+			height:100px;
+			/*background-color: lightblue;*/
+			margin-left: 270px;
+		}
+		.ZHONG{
+			width:100%;
+			height:785px;
+			background-color: white;
+			overflow-x: hidden;
+			overflow-y: hidden;
+			position: fixed;
+			top:60px;
+		}
+		#menu{
+			width:150px;
+			height:785px;
+			background-color: white;
+			/*background-color: white;*/
+			outline: invert;
+			overflow-x: hidden;
+			overflow-y: hidden;
+			float:left;
+		}
+		.menu2{
+			width:100%;
+			height:40px;
+			font-size: 16px;
+			background-color:white;
+			/*background-color:white;*/
+			position: relative;
+			top:30px;
+			font-family: '等线';
+			text-align: center;
+			/*border-radius: 2px;*/
+			cursor:pointer;
+			color:#54667a;
+			z-index: 999;
+
+		}
+		.menu2:hover{
+			box-sizing: border-box;
+			border-left: 3px solid #009efb;
+			color:#009efb;
+		}
+		.panel2{
+			width:100%;
+			position: relative;
+			top:0px;
+			height:140px;
+			background-color: rgba(255,255,255,0.1);
+			/*background-color: #CBDCFF;*/
+			/*left:5px;*/
+			top:27px;
+			text-align: center;
+			border-radius: 4px;
+			color:gray;
+			font-size: 12px;
+			z-index:1;
+		}
+		.panel3{
+			width:100%;
+			position: relative;
+			height:100px;
+			background-color: rgba(255,255,255,0.1);
+			/*left:5px;*/
+			top:43px;
+			text-align: center;
+			border-radius: 4px;
+			color:gray;
+		}
+		.div2{
+			width:100%; 
+			height:40px; 
+			background-color: rgba(0,0,0,0);
+			/*background-color: rgba(255,255,255,0.5);*/
+			position: relative; 
+			top:10px; 
+			font-weight: bolder;
+			font-family: '等线';
+			font-size: 14px;
+			cursor: pointer;
+			color:black;
+		}
+		.div2:hover{
+			color:white;
+		}
+		.a1{
+			text-decoration: none; 
+			/*color:#C6CEBF; */
+			color:#54667a;
+			position: relative; 
+			top:10px;
+		}
+		.a1:hover{
+			color:#009efb ;
+		}
+		.main{
+			width:92%;
+			height:785px;
+			/*background: #eef5f9;*/
+			background-color: #f2f7f8;
+			overflow-x: hidden;
+			overflow-y: scroll;
+			position: absolute;
+			left:150px;
+			z-index: 1;
+			border:none;
+			top:0px;
+		}
+		#jinji{
+			width:300px;
+			height:200px;
+			background-color: white;
+			position: absolute;
+			top:50px;
+			left:260px;
+			z-index: 999;
+			border:1px solid #C0C0C0;
+			display: none;
+		}
+		.Kii{
+			float:right;
+			position: relative;
+			right:23%;
+			top:21px;
+		}
+		.MJ{
+			
+			border:none;
+		}
+	</style>
+</head>
+<body>	
+	<div id="app" style="font-family: 'Open Sans',sans-serif;">
+		<div id="header">
+			<div class="menu1" @click="Click5()">
+				<i class="fas fa-bars" style="margin-top: 18px;font-size: 22px;"></i>
+			</div>
+			
+			<p style="margin-top: 16px; margin-left:-5px;" class="page" @click="Back()">USER</p>
+			
+			<div class="func">
+				<ul style="padding-top:0; margin-bottom: 0; list-style: none;">
+					<li style="position: relative;display: inline-block;"><a href="" class="A1"><i class="fas fa-tasks"></i></a></li>
+					<li style="position: relative;display: inline-block;"><a href="" class="A1"><i class="fas fa-envelope"></i></a></li>
+					<li style="position: relative;display: inline-block;"><a href="#" class="A1" @click="CLICK()"><i class="fas fa-bell"></i></a></li>
+				</ul>
+			</div>
+			<div class="select" v-if="Test == 0">
+					
+				<ul style="list-style: none;">
+					<li style="margin-left: 10px; display: inline-block;">
+						<input type="text" name="" class="Sel" v-model="text1" placeholder="Search">
+						<a href="" class="A2"><i class="fas fa-search"></i></a>
+					</li>
+					<li style="display: inline-block;">
+					<button class="btn3" @click="Click1"><i class="fas fa-user-circle" style="font-size: 24px; margin-right: 10px;"><span style="font-family:'微软雅黑';">  {{Username}}  </span></i></button>
+					<div class="panel1">
+					<button class="btn4" @click="BACK()"><i class="fas fa-user"></i><p style="font-size: 12px; font-family:'微软雅黑';">个人信息</p></button>
+					<button class="btn4" style="margin-left: -4.5px;"><i class="fas fa-sign-out-alt"></i><p style="font-size: 12px; font-family:'微软雅黑';">退出</p></button>
+					<!-- <button class="btn5"><i class="fas fa-sign-out-alt"><span style="font-size: 14px; "> 退出 </span></i></button> -->
+					</li>
+
+				</ul>
+			</div>
+		</div>
+		<div id="jinji">
+			<table style="width:100%;text-align: left;">
+				<tr>
+					<th>申请人：</th>
+					<th>申请时间：</th>
+					<th>操作</th>
+				</tr>
+				<tr v-for="(item,index) in list">
+					<td>{{item.Name}}</td>
+					<td>{{item.Time}}:00~~{{item.Time}}:00</td>
+					<td>
+						<button>同意</button>
+						<button>拒绝</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="ZHONG">
+			<div id="menu" :style="Object1">
+				<div class="menu2" @click="Click3()" v-if="Test3 == 0">
+					<p style="position: relative;top:10px;">个人空间<i class="fa fa-caret-right" aria-hidden="true" style="position: relative;left:30px;" v-if="value == 0"></i>
+					<i class="fa fa-caret-down" aria-hidden="true" style="position: relative;left:25px;" v-if="value == 1"></i></p>
+				</div>
+				<div class="menu2" @click="Click3()" v-if="Test3 == 1" style="background-color: rgba(255,255,255,0.5); color:#009efb;border-left: 3px solid #009efb;">
+					<p style="position: relative;top:10px; font-weight: bold;">个人空间<i class="fa fa-caret-right" aria-hidden="true" style="position: relative;left:30px;" v-if="value == 0"></i>
+					<i class="fa fa-caret-down" aria-hidden="true" style="position: relative;left:25px;" v-if="value == 1"></i></p>
+				</div>
+				<div class="panel2" style="display: none;">
+					<div class="div2">
+						<a href="#" class="a1" @click="a1"><p>预约记录</p></a>
+					</div>
+					<div class="div2">
+						<a href="#" class="a1" @click="a2"><p>个人日志</p></a>
+					</div>
+					<div class="div2">
+						<a href="#" class="a1" @click="a3"><p>个人申请</p></a>
+					</div>
+				</div>
+				<div class="menu2" style="top:45px;" @click = "Click4()" v-if="Test4 == 0">
+					<p style="position: relative; top:10px; ">项目活动<i class="fa fa-caret-right" aria-hidden="true" style="position: relative;left:30px;" v-if="value1 == 0"></i>
+						<i class="fa fa-caret-down" aria-hidden="true" style="position: relative;left:25px;" v-if="value1 == 1"></i></p>
+				</div>
+				<div class="menu2" style="top:45px; background-color: rgba(255,255,255,0.5); color:#009efb;border-left: 3px solid #009efb;" @click = "Click4()" v-if="Test4 == 1">
+					<p style="position: relative; top:10px;font-weight: bold;">项目活动<i class="fa fa-caret-right" aria-hidden="true" style="position: relative;left:30px;" v-if="value1 == 0"></i>
+						<i class="fa fa-caret-down" aria-hidden="true" style="position: relative;left:25px;" v-if="value1 == 1"></i></p>
+				</div>
+				<div class="panel3" style="display: none;">
+					<div class="div2">
+						<a href="#" class="a1" style="" @click="a4"><p>已完成的项目</p></a>
+					</div>
+					<div class="div2">
+						<a href="#" class="a1" style="" @click="a5"><p>进行中的项目</p></a>
+					</div>
+				</div>
+				<div class="menu2" style="top:60px;" v-if="Test5 == 0" @click="Click6()">
+					<a href="#" class="a1" style="" @click="a6"><p>员工列表</p></a>
+				</div>
+				<div class="menu2" style="top:60px; border-left: 3px solid #009efb;" v-if="Test5 == 1" @click="Click6()">
+					<a href="#" class="a1" style="color:#009efb;"><p>员工列表</p></a>
+				</div>
+				<div class="menu2" style="top:75px;" v-if="Test6 == 0" @click="Click7()">
+					<a href="#" class="a1" style="" @click="a7"><p>安全指南</p></a>
+				</div>
+				<div class="menu2" style="top:75px;" v-if="Test6 == 1" @click="Click7()">
+					<a href="#" class="a1" style="color:#494CA2;" @click="a8"><p>安全指南</p></a>
+				</div>
+				<div class="menu2" style="top:90px;" v-if="Test7 == 0" @click="Click8()">
+					<a href="#" class="a1" style="" @click="a9"><p>可用设备</p></a>
+				</div>
+				<div class="menu2" style="top:90px;border-left: 3px solid #009efb;" v-if="Test7 == 1" @click="Click8()">
+					<a href="#" class="a1" style="color:#009efb;" @click="a9"><p>可用设备</p></a>
+				</div>
+				<div class="menu2" style="top:105px;" v-if="Test8 == 0" @click="Click9()">
+					<a href="#" class="a1" style="" @click="a10"><p>全部设备</p></a>
+				</div>
+				<div class="menu2" style="top:105px;border-left: 3px solid #009efb;" v-if="Test8 == 1" @click="Click9()">
+					<a href="#" class="a1" style="color:#009efb;" @click="a10"><p>全部设备</p></a>
+				</div>
+				<div class="menu2" style="top:120px;" v-if="Test9 == 0" @click="Click10()">
+					<a href="#" class="a1" style="" @click="a11"><p>数据分析</p></a>
+				</div>
+				<div class="menu2" style="top:120px;border-left: 3px solid #009efb;" v-if="Test9 == 1" @click="Click10()">
+					<a href="#" class="a1" style="color:#009efb;" @click="a11"><p>数据分析</p></a>
+				</div>
+			</div>
+			<iframe :src="html" class="main" :style="Object" allowtransparency="true"></iframe>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el:'#app',
+			data:{
+				html:'主页.html',
+				Username:'User',
+				width:0,
+				value:0,
+				value1:0,
+				list:[
+					{Name:'asdasdasd', Time:8},
+					{Name:'wer',Time:9},
+					{Name:'tyu',Time:10},
+					{Name:'yte',Time:11}
+				],
+				screenWidth: document.body.clientWidth,
+				Test:0,
+				Test1:0,
+				Object:{
+					width:'',
+					left:'', 
+					// display:'none'
+				},
+				Test2:0,
+				Object1:{
+					display:'',
+				},
+				time: '',
+		        date: '',
+		        list3:[],
+		        list4:[],
+		        m:'',
+				n:'',
+				a:'',
+				c:1,
+				time1:0,
+				time2:0,
+				tab:1,
+				text1:'',
+				Test3:0,
+				Test4:0,
+				Test5:0,
+				Test6:0,
+				Test7:0,
+				Test8:0,
+				Test9:0,
+				ZC:0,
+				ZT:0
+			},
+			created: function() {
+			   this.initData(null);
+			},
+			watch: {
+			 screenWidth (val) {
+			  this.screenWidth = val
+			 }
+			},
+			watch: {
+				 screenWidth (val) {
+				  if (!this.timer) {
+				   this.screenWidth = val
+				   this.timer = true
+				   let that = this
+				   setTimeout(function () {
+				    that.init()
+				    that.timer = false
+				   }, 400)
+				  }
+				 }
+				},
+			methods:{
+				initData(){
+
+						const that = this
+				 		window.onresize = () => {
+				  		return (() => {
+				   		window.screenWidth = document.body.clientWidth
+				   		that.screenWidth = window.screenWidth
+				   		this.width = this.screenWidth;
+				   		if(this.width < 1200){
+				 			this.Object1.display = "none";
+				 			this.Test1 = 1;
+				 		}else{
+				 			this.Object1.display = "";
+				 			this.Test1 = 0;
+				 		}
+
+				   		if(this.Test1 == 0){
+				   			this.Object.width = this.width - 150 + 'px';
+				   			this.Object.left = '150px'; 
+				   		}else{
+				   			this.Object.width = this.width + 'px';
+				   			this.Object.left = '0px';                    
+				   			
+				   		}
+				   		if(this.width < 960){
+				 			this.Test = 1;
+				 		}else{
+				 			this.Test = 0;
+				 		}
+
+				 		if(this.width < 1133){
+				 			this.Test2 = 1;
+				 		}else{
+				 			this.Test2 = 0;
+				 		}
+
+				 		if(this.width * 0.25 < 200){
+				 			this.Object3.width = 200+'px';
+				 		}
+				 		if(this.width * 0.25 >= 200){
+				 			this.Object3.width = this.width * 0.25 + 'px';
+				 		}
+				  		})()
+				 		}
+
+				 		this.m = 0;
+						this.n = 9;
+						
+						this.a = Math.ceil(this.list2.length / 10);
+					
+						for(var b = 1 ; b<=this.a; b++){
+							this.list3 = b;
+							// console.log(this.list3.length);
+						}
+						// if(this.ZT < 10){
+						// 	this.ZT = '0'+this.list[index].Time + 1;
+						// }else{
+						// 	this.ZT = this.list[0]
+						// }
+
+						
+					
+					
+				},
+				BACK(){
+					this.html = '员工信息.html'
+				},
+				change1(index){
+					
+
+							if(index % 2 == 0){
+								return "tr2";
+							}else{
+								return "tr1";
+							}
+						
+						},
+				change2(index){
+							if(index % 2 == 0){
+								return "tr2";
+							}else{
+								return "tr1";
+							}
+						},
+				change3(index){
+							if(index % 2 == 0){
+								return "tr2";
+							}else{
+								return "tr2";
+							}
+						},
+				Click1(){
+					$(".panel1").slideToggle("slow");
+				},
+				Click2(){
+					$(".panel4").slideToggle("slow");
+				},
+				Click3(){
+					if(this.Test3 == 0){
+						this.Test3 = 1;
+						this.Test5 = 0;
+						this.Test6 = 0;
+						this.Test4 = 0;
+						this.Test7 = 0;
+						this.Test8 = 0;
+					}else{
+						this.Test3 = 0;
+					}
+					if(this.value == 0){
+						this.value = 1;
+					}else{
+						this.value = 0;
+					}
+					$(".panel2").slideToggle("slow");
+				},
+				Click4(){
+					$(".panel3").slideToggle("slow");
+					if(this.Test4 == 0){
+						this.Test4 = 1;
+						this.Test5 = 0;
+						this.Test6 = 0;
+						this.Test3 = 0;
+						this.Test7 = 0;
+						this.Test8 = 0;
+						this.Test9 = 0;
+					}else{
+						this.Test4 = 0;
+					}
+					if(this.value1 == 0){
+						this.value1 = 1;
+					}else{
+						this.value1 = 0;
+					}
+				},
+				Click5(){
+					$("#menu").toggle();
+					if(this.width == 0){
+						this.width = this.screenWidth;
+						
+					}else{
+						this.width = this.width;
+
+					}
+					if(this.Test1 == 1){
+						this.Test1 = 0;
+						this.Object.width = this.width - 150 + 'px';
+				   		this.Object.left = '150px';
+					}else{
+						this.Test1 = 1;
+						this.Object.width = this.width + 'px';
+				   		this.Object.left = '0px';
+					}
+
+				},
+				Click6(){
+					if(this.Test5 == 0){
+						this.Test5 = 1;
+						this.Test6 = 0;
+						this.Test3 = 0;
+						this.Test4 = 0;
+						this.Test7 = 0;
+						this.Test8 = 0;
+						this.Test9 = 0;
+						
+					}else{
+						this.Test5 = 0;
+					}
+				},
+				Click7(){
+					if(this.Test6 == 0){
+						this.Test6 = 1;
+						this.Test3 = 0;
+						this.Test4 = 0;
+						this.Test5 = 0;
+						this.Test7 = 0;
+						this.Test8 = 0;
+						this.Test9 = 0;
+						
+					}else{
+						this.Test6 = 0;
+					}
+				},
+				Click8(){
+					if(this.Test7 == 0){
+						this.Test7 = 1;
+						this.Test3 = 0;
+						this.Test4 = 0;
+						this.Test5 = 0;
+						this.Test6 = 0;
+						this.Test8 = 0;
+						this.Test9 = 0;
+						
+					}else{
+						this.Test7 = 0;
+					}
+				},
+				Click9(){
+					if(this.Test8 == 0){
+						this.Test8 = 1;
+						this.Test3 = 0;
+						this.Test4 = 0;
+						this.Test5 = 0;
+						this.Test6 = 0;
+						this.Test7 = 0;
+						
+					}else{
+						this.Test8 = 0;
+					}
+				},
+				Click10(){
+					if(this.Test9 == 0){
+						this.Test3 = 0;
+						this.Test4 = 0;
+						this.Test5 = 0;
+						this.Test6 = 0;
+						this.Test7 = 0;
+						this.Test8 = 0;
+						this.Test9 = 1;
+					}else{
+						this.Test9 = 0;
+					}
+				},
+				CLICK(){
+					$("#jinji").slideToggle('slow')
+					// console.log(this.index)
+				},
+				Back(){
+					this.html = '主页.html';
+					this.Test3 = 0;
+					this.Test4 = 0;
+					this.Test5 = 0;
+					this.Test6 = 0;
+					this.Test7 = 0;
+					this.Test8 = 0;
+					this.Test9 = 0;
+				},
+				a1(){
+					this.html = '预约记录.html';
+				},
+				a2(){
+					this.html = '个人日志.html';
+				},
+				a3(){
+					this.html = '个人申请.html';
+				},
+				a4(){
+					this.html='完成项目.html';
+				},
+				a5(){
+					this.html='进行中的项目.html';
+				},
+				a9(){
+					this.html ='设备主页.html';
+				},
+				a6(){
+					this.html = '员工列表.html';
+				},
+				a7(){
+
+				},
+				a8(){
+
+				},
+				a10(){
+					this.html = '全部设备.html'
+				},
+				a11(){
+					this.html = '数据分析.html';
+				}
+
+			}
+		});
+	
+
+
+	</script>
+
+</body>
+</html>

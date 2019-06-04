@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1" />
+	<title>edit</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts-en.common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	    <style type="text/css">
+
+		.edit{
+		  position: relative;
+		  left:5%;
+          width:500px;
+		  height:600px;
+		  border-color: #d7dfe3;
+          border-radius: 4px;
+         -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+		  margin:30px;
+            float:left;
+        }
+        .form-group{
+        color:#b4b0b0;
+        width:500px;
+        padding-left:50px;
+        padding-right:50px;
+        }
+
+        .form-control-line, .form-control-line:focus{
+		    box-shadow: none;
+			border: 0px;
+            outline:none;
+			border-radius:1px;	
+		}
+
+        .form-control-line{
+         border-bottom:1px solid #d9d9d9;
+        }
+        .form-control-line:focus{
+         border-bottom:2px solid #1e88e5;
+        }
+        #Tu2{
+            width:50%;
+            height:500px;
+            background-color: rgba(0,0,0,0);
+            position: relative;
+            float:right;
+            right:5%;
+            top:30px;
+        }
+        #Tu3{
+            width:80%;
+            height:500px;
+            background-color: rgba(0,0,0,0);
+            position: absolute;
+            left:10%;
+            top:580px;
+        }
+        #Tu2-1{
+            background-color: rgba(0,0,0,0);
+            height:100px;
+            width:10%;
+            position: absolute;
+            float:right;
+            top:30px;
+            right:5%;
+        }
+         #Tu3-1{
+             background-color: rgba(0,0,0,0);
+             height:100px;
+             width:10%;
+             position: absolute;
+             float:right;
+             top:610px;
+             right:5%;
+         }
+            #btn{
+                width:50px;
+                height:30px;
+                border:1px solid #c0c0c0;
+                background: white;
+            }
+    </style>
+</head>
+<body style="background-color: rgba(0,0,0,0);">
+<div id="app">
+<div class="edit" style="background-color: white;height:500px;">
+                <form class="form-horizontal form-material" th:action="@{/admin/equipment/update}" method="post">
+                    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+                    <input type="hidden" name="id" th:value="${equipment.id}"><br>
+
+                    <div class="form-group" style="position:relative;top:30px;">
+                                        <label class="col-md-12">设备编号</label>
+                                        <div class="col-md-12" th:if="${#strings.isEmpty(session.admin)}">
+                                            [[${equipment.number}]]
+                                        </div>
+                                        <div class="col-md-12" th:if="${!#strings.isEmpty(session.admin)}">
+                                            <input type="text" placeholder="编号" name="number" th:value="${equipment.number}" class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="position:relative;top:30px;">
+                                        <label for="example-email" class="col-md-12">设备名称</label>
+                                        <div class="col-md-12" th:if="${#strings.isEmpty(session.admin)}">
+                                            [[${equipment.name}]]
+                                        </div>
+                                        <div class="col-md-12" th:if="${!#strings.isEmpty(session.admin)}">
+                                            <input type="text" placeholder="名称" name="name" th:value="${equipment.name}" class="form-control form-control-line" >
+                                        </div>
+                                    </div>
+                                     <div class="form-group" style="position:relative;top:30px;">
+                                        <label for="example-email" class="col-md-12">设备型号</label>
+                                        <div class="col-md-12" th:if="${#strings.isEmpty(session.admin)}">
+                                            [[${equipment.model}]]
+                                        </div>
+                                        <div class="col-md-12" th:if="${!#strings.isEmpty(session.admin)}">
+                                            <input type="text" placeholder="型号" name="model" th:value="${equipment.model}" class="form-control form-control-line" >
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label class="col-md-12">密码</label>
+                                        <div class="col-md-12">
+                                            <input type="password" value="password" class="form-control form-control-line">
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="form-group" style="position:relative;top:20px;">
+                                        <label class="col-md-12" >性别</label>
+                                        <div class="col-md-5">
+                                     <input type="radio" name="sex" value="male" style="width:50px" :checked = 'checked1' >男
+									  <input type="radio" name="sex" value="female" style="width:50px"  :checked = 'checked2'>女
+									 </div>
+                                    </div> -->
+									      
+										<!--  <div class="form-group" style="position:relative;top:20px;">
+                                        <label class="col-sm-12">权限</label>
+                                        <div class="col-sm-12" v-if="Quanxian == '系统管理员'">
+                                                 <input type="text" :placeholder="Quanxian" class="form-control form-control-line">
+                                        </div>
+                                        <div class="col-sm-12" v-else="Quanxian ！= '系统管理员'">
+                                                {{Quanxian}} 
+                                        </div>
+                                    </div> -->
+								
+                                    
+                                    <div class="form-group" style="position:relative;top:30px;">
+                                        <label class="col-sm-12">位置</label>
+                                        <div class="col-sm-12" th:if="${!#strings.isEmpty(session.admin)}">
+                                            	 <input type="text" placeholder="位置" name="location" th:value="${equipment.location}" class="form-control form-control-line">
+                                                
+                                        </div>
+                                        <div class="col-sm-12" th:if="${#strings.isEmpty(session.admin)}">
+                                            [[${equipment.location}]]
+                                        </div>
+                                    </div>
+									<div class="form-group" style="position:relative;top:30px;">
+                                        <label class="col-md-12">品牌</label>
+                                        <div class="col-md-12" th:if="${#strings.isEmpty(session.admin)}">
+                                            [[${equipment.brand}]]
+                                        </div>
+                                        <div class="col-md-12" th:if="${!#strings.isEmpty(session.admin)}">
+                                            <input type="text" placeholder="品牌" name="brand" th:value="${equipment.brand}" class="form-control form-control-line">
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="state" th:value="${equipment.state}">
+                                    <!--<div class="form-group" style="position:relative;top:30px;">-->
+                                        <!--<label class="col-md-12">状态</label>-->
+                                        <!--<div class="col-md-12" >-->
+                                            <!--[[${equipment.state}]]-->
+                                            <!--<input type="hidden" name="state" th:value="${equipment.state}">-->
+                                        <!--</div>-->
+                                        <!--<div th:if="${!#strings.isEmpty(session.admin)}">-->
+                                            <!--<select name="state" th:if="${equipment.state} eq '启用'">-->
+                                                <!--<option value="启用" selected="selected">启用</option>-->
+                                                <!--<option value="停用">停用</option>-->
+                                                <!--<option value="报废">报废</option>-->
+                                            <!--</select>-->
+                                            <!--<select name="state" th:if="${equipment.state} eq '停用'">-->
+                                                <!--<option value="启用">启用</option>-->
+                                                <!--<option value="停用" selected="selected">停用</option>-->
+                                                <!--<option value="报废">报废</option>-->
+                                            <!--</select>-->
+                                            <!--<select name="state" th:if="${equipment.state} eq '报废'">-->
+                                                <!--<option value="启用">启用</option>-->
+                                                <!--<option value="停用">停用</option>-->
+                                                <!--<option value="报废" selected="selected">报废</option>-->
+                                            <!--</select>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+                                    <div class="form-group" style="position:relative;top:40px;">
+                                         <div class="col-sm-1">
+                                          <input type="submit" class="finish btn btn-info" th:if="${!#strings.isEmpty(session.admin)}" value="修改"></input>
+                                          </div>
+                                          <div class="col-sm-10">
+                                            <!--<button class="finish btn btn-success" style="position: relative;left:375px;"><a href="http://localhost:8080/equipmentlist/all" style="color:white;">返回</a></button>-->
+                                              <a href="http://localhost:8080/equipmentlist/all" style="position: relative;left:275px;"><button class="finish btn btn-success">返回</button></a>
+                                          </div>  
+                                      </div>
+                                      <!--<div class="form-group" style="position:relative;top:20px;" th:if="${!#strings.isEmpty(session.admin)}">-->
+                                         <!--<div class="col-sm-1">-->
+                                          <!--<button class="finish btn btn-info">修改</button>-->
+                                          <!--</div>-->
+                                          <!--<div class="col-sm-10">-->
+                                            <!--<button class="finish btn btn-success" style="position: relative;left:375px;"><a href="全部设备.html" style="color:white;">返回</a></button>-->
+                                          <!--</div>-->
+                                      <!--</div>-->
+                                </form>
+                               <!--  <a href="设备主页.html" style="text-decoration: none; color:red;float:right; margin-right: 85px;font-weight: bold;margin-top: 20px;" v-if="User == '普通用户'">返回</a>
+                                <a href="全部设备.html" style="text-decoration: none; color:red;float:right; margin-right: 85px;font-weight: bold;margin-top: 20px;" v-if="User != '普通用户'">返回</a> -->
+    </div>
+    <div id="Tu2">
+
+    </div>
+    <div id="Tu2-1">
+        <button id="btn" @click="YUE" v-if="y == 0">月</button>
+        <button id="btn" @click="RI" v-if="r == 1">日</button>
+    </div>
+    <div id="Tu3">
+
+    </div>
+    <div id="Tu3-1">
+        <button id="btn" @click="YUE1" v-if="y1 == 0">月</button>
+        <button id="btn" @click="RI1" v-if="r1 == 1">日</button>
+    </div>
+</div>
+<script type="text/javascript">
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            list:[{ID:'1312321',Name:'153326',Kind:'12312',Where:'102',GS:'sdaasd'}],
+            ID:'',
+            Name:'',
+            Kind:'',
+            Where:'',
+            GS:'',
+            User:'普通用户',
+            y:0,
+            r:0,
+            y1:0,
+            r1:0,
+            
+        },
+        created:function(){
+            this.initData(null);
+        },
+        methods:{
+            initData(){
+                this.ID = this.list[0].ID;
+                this.Name = this.list[0].Name;
+                this.Kind = this.list[0].Kind;
+                this.Where = this.list[0].Where;
+                this.GS = this.list[0].GS;
+            },
+            YUE(){
+                this.y = 1;
+                this.r = 1;
+                myChart1.setOption(option2);
+            },
+            RI(){
+                this.y = 0;
+                this.r = 0;
+                myChart1.setOption(option1);
+            },
+            YUE1(){
+                this.y1 = 1;
+                this.r1 = 1;
+                myChart2.setOption(option4);
+            },
+            RI1(){
+                this.y1 = 0;
+                this.r1 = 0;
+                myChart2.setOption(option3);
+            }
+        }
+    })
+
+    var month = 3;
+    var day = [];
+    if(month == 2){
+    	for(var i = 1; i<=28; i++){
+    		day[i] = ''+month+'-'+i;
+    	}
+    }
+
+    if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 ){
+    	for(var i = 1; i<=31;i++){
+    		day[i-1] = ''+month+'-'+i;
+    	}
+    }
+    if(month == 4 || month == 6 || month == 9 || month == 11){
+    	for(var i = 1; i<=30;i++){
+    		day[i] = ''+month+'-'+i;
+    	}
+    }
+    // console.log(day);
+    var myChart1 = echarts.init(document.getElementById('Tu2'));
+    var option1 = {
+    	title : {
+            text: '预约项目数量（日）',
+            // subtext: '纯属虚构',
+            x:'center'
+        },
+    	    xAxis: {
+    	        type: 'category',
+    	        data: day
+    	    },
+    	    yAxis: {
+    	        type: 'value'
+    	    },
+    	    series: [{
+    	        data: [12, 13, 14, 10, 11, 13, 18,11,12,14,15,9,10,8,7,12,13,14,9,12,11,12,13,18,6,9,12,11,19,12,12],
+    	        type: 'line',
+    	        smooth: true
+    	    }]
+    	};
+    	var option2 = {
+    		title : {
+            text: '预约项目数量（月）',
+            // subtext: '纯属虚构',
+            x:'center'
+        },
+    	    xAxis: {
+    	        type: 'category',
+    	        data: [1,2,3,4,5,6,7,8,9,10,11,12]
+    	    },
+    	    yAxis: {
+    	        type: 'value'
+    	    },
+    	    series: [{
+    	        data: [200, 120, 110, 140, 100, 130, 100,90,80,100,130,140],
+    	        type: 'line',
+    	        smooth: true
+    	    }]
+    	};
+    	myChart1.setOption(option1);
+
+    var month = 3;
+    var day = [];
+    if(month == 2){
+    	for(var i = 1; i<=28; i++){
+    		day[i] = ''+month+'-'+i;
+    	}
+    }
+
+    if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 ){
+    	for(var i = 1; i<=31;i++){
+    		day[i-1] = ''+month+'-'+i;
+    	}
+    }
+    if(month == 4 || month == 6 || month == 9 || month == 11){
+    	for(var i = 1; i<=30;i++){
+    		day[i] = ''+month+'-'+i;
+    	}
+    }
+    // console.log(day);
+    var myChart2 = echarts.init(document.getElementById('Tu3'));
+    var option3 = {
+    	title : {
+            text: '预约人数数量（日）',
+            // subtext: '纯属虚构',
+            x:'center'
+        },
+    	    xAxis: {
+    	        type: 'category',
+    	        data: day
+    	    },
+    	    yAxis: {
+    	        type: 'value'
+    	    },
+    	    series: [{
+    	        data: [20, 21, 22, 21, 22, 23, 21,25,19,20,19,28,18,23,10,12,24,25,15,14,16,17,18,19,21,23,16,18,17,19,21],
+    	        type: 'line',
+    	        smooth: true
+    	    }]
+    	};
+    	var option4 = {
+    		title : {
+            text: '预约人数数量（月）',
+            // subtext: '纯属虚构',
+            x:'center'
+        },
+    	    xAxis: {
+    	        type: 'category',
+    	        data: [1,2,3,4,5,6,7,8,9,10,11,12]
+    	    },
+    	    yAxis: {
+    	        type: 'value'
+    	    },
+    	    series: [{
+    	        data: [300, 320, 351, 334, 329, 330, 332, 331,290,298,300,301],
+    	        type: 'line',
+    	        smooth: true
+    	    }]
+    	};
+    	myChart2.setOption(option3);
+</script>
+</body>
+</html>

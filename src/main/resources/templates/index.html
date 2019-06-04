@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/main.html}">主页</a>
+<a th:href="@{/userinfo/}+${session.loginUser}">个人中心</a>
+<a th:href="@{/cancel}">注销</a>
+<h1 th:id="ss" th:text="success">Welcome</h1>
+登陆成功后的跳转页面
+
+用户：[[${session.loginUser}]]
+权限：[[${session.admin}]] <p1 th:if="${#strings.isEmpty(session.admin)}">普通用户</p1>
+<!--<a th:href="@{/userinfo/}+${session.loginUser}">用户信息</a>-->
+<a th:href="@{/equipmentlist}">设备列表</a>
+<a th:if="${not #strings.isEmpty(session.admin)}" th:href="@{/admin/loglist}">日志</a>
+<a th:href="@{/projectlist}">项目列表</a>
+<a th:href="@{/user/appointment/}+${session.loginUser}">我的预约</a>
+<a th:href="@{/appointment/myInsertionRequired}">我的申请</a>
+<a th:href="@{/appointment/InsertionRequired}">插入请求</a>
+<!--<a th:href="@{/admin/appointment/insertionRequired}" th:if="${session.admin} eq '管理员'">申请列表</a>-->
+<!--<a th:href="@{/userlist}" th:if="${not #strings.isEmpty(session.systemAdmin)}">userlist</a>-->
+</body>
+</html>

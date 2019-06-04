@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+<center>
+    <br>
+    <h2>搜索页面</h2>
+    <div style="width: 800px;margin-top: 30px;">
+        <form th:action="@{/searchInfo}" method="post" class="form-inline">
+
+            <input type="text" name="keyword" class="form-control" required="required" style="width: 300px;">
+
+            <select name="condition" class="btn btn-default dropdown-toggle">
+                <option value="全局模糊">全局模糊</option>
+                <option value="设备编号">设备编号</option>
+                <option value="使用位置">使用位置</option>
+                <option value="项目编号">项目编号</option>
+                <option value="预约时间">预约时间</option>
+                <option value="用户人员">用户人员</option>
+            </select>
+            <input type="submit" value="查询" class="btn btn-success">
+        </form>
+
+    </div>
+
+
+</center>
+</body>
+</html>

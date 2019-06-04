@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+        }
+        .login{
+            background-color:white;
+            width:330px;
+            height:300px;
+            /*position:relative;*/
+            /*left:970px;*/
+            /*top:180px;*/
+            border-radius:8px;
+            position: absolute;
+            top:100px;
+            left: 65%;
+        }
+        /*box-shadow:1px 2px 3px 2px #edf3fb ;*/
+    </style>
+
+</head>
+<body>
+<div style="width:100%; height:700px;background: url(img/login.jpg); background-size: 100% 100%;margin-top: -20px;">
+    <center>
+        <div style="width: 300px;" class="login">
+            <center><h3>登 录</h3></center>
+            <br>
+            <form th:action="@{/login}" method="post">
+                <center><p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p></center>
+                <input style="width: 80%" type="text" class="form-control" th:name="username" placeholder="账号" required="required">
+                <br>
+                <input style="width: 80%" type="password" class="form-control" th:name="password" placeholder="密码" required="required">
+                <br>
+                <input type="submit" class="btn btn-default" value="登陆">
+
+                <a th:href="@{/register}"><button class="btn btn-default">注册</button></a>
+                <a th:href="@{/system/login}"><button class="btn btn-info">系统管理员登陆</button></a>
+            </form>
+        </div>
+    </center>
+</div>
+
+</body>
+
+</html>

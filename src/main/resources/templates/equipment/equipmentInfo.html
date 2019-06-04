@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/main.html}">主页</a>
+<a th:href="@{/userinfo/}+${session.loginUser}" th:if="${session.systemAdmin} ne '系统管理员'">个人中心</a>
+<a th:href="@{/system/systemAdmin/}+${session.loginUser}" th:if="${session.systemAdmin} eq '系统管理员'">系统管理员信息</a>
+<a th:href="@{/cancel}">注销</a>
+<br><a th:href="@{/equipmentlist}">设备列表</a><br>
+id：[[${equipment.id}]]<br>
+编号：[[${equipment.number}]]<br>
+名称：[[${equipment.name}]]<br>
+品牌：[[${equipment.brand}]]<br>
+型号:[[${equipment.model}]]<br>
+使用位置：[[${equipment.location}]]<br>
+<p1 th:if="${not #strings.isEmpty(session.admin)}">状态：[[${equipment.state}]]</p1>
+<br>
+<a th:href="@{/admin/equipment/update/}+${equipment.id}" th:if="${not #strings.isEmpty(session.admin)}">编辑</a>
+</body>
+</html>

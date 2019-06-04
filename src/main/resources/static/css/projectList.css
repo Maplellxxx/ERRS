@@ -1,0 +1,13 @@
+.add-pro button{
+	background-color: #2075f6; 
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    cursor: pointer;
+	border-radius: 2px;
+}
+
+ 

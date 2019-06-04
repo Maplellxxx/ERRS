@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="Test/vue.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<style>
+		*{
+			margin:0px;
+			padding:0px;
+		}
+		.active{
+			color:#007ec7;
+		}
+		.btn1{
+			width:100px;
+			height:100%;
+			border:none;
+			background-color: rgba(0,0,0,0);
+			font-size: 30px;
+			float:left;
+			color:#007ec7;
+		}
+		.BUTTON{
+			width:400px;
+			height:50px;
+			background-color: rgba(0,0,0,0);
+			text-align: center;
+			margin-left:30%;
+		}
+		.btn2{
+			width:50px;
+			height:100%;
+			font-size: 18px;
+			background-color: rgba(0,0,0,0);
+			border:none;
+			
+			/*float:left;*/
+		}
+		/*.tr1{
+			background-color: #ebf9ff;
+		}*/
+		.Btn1{
+			width:25px;
+			height:25px;
+			border-radius: 50%;
+			border:none;
+			font-size: 15px;
+			background-color: rgba(0,0,0,0);
+			/*color:white;*/
+		}
+	</style>
+
+	</head>
+	<body style="background-color: rgba(0,0,0,0);">
+	
+	<div class="container" style="margin-top: 10px;">
+	        <div class="wd-header">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="wd-tab1 active">
+                            <a href="#" data-toggle="tab" style="background-color: #f0f0f0; border:2px solid white;border-bottom-style: none;">用户列表</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+		
+		<div class="table-responsive">
+	<table class="table table-striped table-bordered table-hover" style="background-color: white;">
+	<thead>
+	<tr>
+	<th><p>用户名</p></th>
+		<th><p>密码</p></th>
+		<th><p>权限</p></th>
+		<th><p>用户姓名</p></th>
+			<th><p>性别</p></th>
+		<th><p>项目组</p></th>
+				<th><p>部门</p></th>
+		<th><p>邮箱</p></th>
+		<th><center><p>操作</p></center></th>
+	</tr>
+	</thead>
+<tbody>
+<!--<tr v-for="(item,index) in list" v-if="m <= index && index <= n" class="tr1">-->
+	<!--<td><a href="#" @click="info(index)">{{item.username}}</a></td>-->
+	<!--<td>{{item.authority}}</td>-->
+	<!--<td>{{item.name}}</td>-->
+	<!--<td>{{item.gender}}</td>-->
+	<!--<td>{{item.projectteam}}</td>-->
+	<!--<td>{{item.department}}</td>-->
+	<!--<td>{{item.email}}</td>-->
+	<!--</tr>-->
+
+<tr th:each="i:${info}">
+
+	<td><a th:href="@{/system/userinfo/}+${i.id}" th:text="${i.username}"></a></td>
+	<td>[[${i.password}]]</td>
+	<td>[[${i.authority}]]</td>
+	<td>[[${i.name}]]</td>
+	<td>[[${i.gender}]]</td>
+	<td>[[${i.projectteam}]]</td>
+	<td>[[${i.department}]]</td>
+	<td>[[${i.email}]]</td>
+	<td><center><a th:href="@{/system/deleteUser/}+${i.id}"><button class="btn btn-danger btn-xs">删除用户</button></a></center></td>
+</tr>
+</tbody>
+	</table>
+	</div>
+		<div class="BUTTON" style="text-align: center">
+			<button @click="Click1()" class="btn1"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></button>
+			<button v-for="(item,index) in list1" @click="Click3(index)" v-bind:class="{'active': c == index + 1}" class="btn2">{{item}}</button>
+			<button @click="Click2()" class="btn1" style="float:right;"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
+		</div>
+</div>
+	<script th:inline="javascript">
+		var vm = new Vue({
+			el:'.container',
+			data:{
+				list:[[${info}]],
+				EndTime:[],
+				list1:[],
+				m:0,
+				n:0,
+				c:0
+			},
+			created:function(){
+				this.initData(null);
+			},
+			methods:{
+				info(index){
+					window.location.href="/system/userinfo/"+this.list[index].id
+				},
+				initData(){
+					for(var i = 0; i<this.list.length; i++){
+						// console.log(this.list[i].StartTime);
+						this.EndTime[i] = this.list[i].StartTime + 1;
+
+					}
+					var a = Math.ceil(this.list.length/15);
+					// console.log(a);
+					for(var i = 0; i< a;i++){
+						this.list1[i] = i+1;
+					}
+					// console.log(this.list1);
+					this.m = 0;
+					this.n = 14;
+					this.c = Math.ceil(this.n/15);
+
+
+				},
+				Click1(){
+					if(this.m>0){
+						this.m = this.m - 15;
+						this.c = this.c -1;
+					}else{
+						this.m = 0;
+					}
+					this.n = this.m + 14;
+				},
+				Click2(){
+					if(this.n < this.list.length-1){
+						this.n = this.n + 15;
+						this.m = this.n - 14;
+						this.c = this.c+1;
+					}else{
+						var k = this.list.length%15;
+						this.n = this.list.length - 1;
+						this.m = this.n-k+1;
+						// console.log(this.n);
+						// console.log(this.m);
+					}
+					
+
+				},
+				Click3(index){
+					// var h = index + 1;
+					// this.n = h * 10 - 1;
+					// this.m = this.n - 9;
+					// this.c = Math.floor(this.n/10) + 1;
+					var h = index + 1;
+					this.n = h * 15 - 1;
+					this.m = this.n - 14;
+					this.c = h;
+	
+				},
+
+			}
+		})
+	</script>
+</body>
+</html>
